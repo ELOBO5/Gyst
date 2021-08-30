@@ -1,0 +1,28 @@
+
+
+/* habit lists */
+#list-container{
+    margin: 50px;
+    width: 80vw;
+
+}
+.habitlist{
+    min-height: 50vh;
+    width: 25vw;
+    background-color: #333;
+}
+
+#stats-container{
+    background-color: #333;
+    min-height: 20vh;
+    width: 80vw;
+    margin-bottom: 30px;
+
+}
+
+h3{
+    color: white;
+    text-align: center;
+    text-decoration: underline;
+}
+

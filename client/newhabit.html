@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GYST</title>
+    <link rel='stylesheet' href="static/css/newhabit.css">
+    <link rel='stylesheet' href="static/css/shared.css">
+</head>
+<body>
+    <nav>
+        <ul class='flex-container outer nav'>
+            <ul id='leftnav'>
+                <li><a href='dash.html'>Dash</a></li>
+                <li><a href='newhabit.html'>+</a></li>
+            </ul>
+            
+            <li><a href='#'><img id=logo src='' alt='logo'></a></li>
+            <li><a href='index.html'>Logout</a></li>
+            
+        </ul>
+        
+    </nav>
+
+   <form action="static/js/newhabit.js" method="get" class='flex-cont-vertical'>
+       <label for="habit">Habit: </label>
+       <input type="text" id="habit-entry" name="habit" placeholder="What would you like to track...?" size='40' maxlength='40' autofocus required><br>
+
+       <label for="frequency">Frequency: </label>
+       <select id="frequency" name="frequency">
+           <option value="Daily">Daily</option>
+           <option value="Weekly">Weekly</option>
+           <option value="Monthly">Monthly</option>
+        </select><br>
+
+        <label for="priority"> Is this a priority?</label>
+        <input type="checkbox" id="priority" name="priority" value="priority"><br>
+        
+
+        <input type="submit" value="Track it!">
+
+    </form>
+
+    
+
+    <footer class='flex-container'>
+        <ul class = 'foot outer'>
+            <li><a href='GITREPO'>GYST aka Get Your Shit Together! Bought to you by Tobi, Tegan, Gorazd and Elicia <img src='GITLOGO'></a></li>
+        </ul>
+    </footer>
+        
+
+
+    </section>
+</body>
+</html>
