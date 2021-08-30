@@ -1,0 +1,59 @@
+body{
+    display: flex;
+    flex-flow: column nowrap;
+    /* background-color: rgb(205, 253, 219); */
+    justify-content: center;
+    align-items: center;
+}
+
+.flex-container{
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+}
+
+/* headers and footers */
+ul.outer {
+    overflow: hidden;
+    width: 100vw;
+    background-color: #333;
+  }
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+  
+.nav li {
+    float: left;
+  }
+
+li a{ 
+    display: block;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+}
+.nav li a {
+    padding: 30px;
+  }
+
+.foot li{
+    padding: 15px;
+}
+
+footer{
+    position: fixed;
+    bottom: 0;
+}
+  
+  /* Change the link color to #111 (black) on hover */
+  .nav li a:hover {
+    background-color: #111;
+  }
+
+
+.active {
+    background-color: #04AA6D;
+  }

@@ -4,19 +4,20 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GYST 💩✨</title>
+    <title>GYST</title>
+    <link rel='stylesheet' href="static/css/shared.css">
     <link rel='stylesheet' href="static/css/dash.css">
 </head>
 <body>
     <nav>
         <ul class='flex-container outer nav'>
             <ul id='leftnav'>
-                <li><a href='DASHBOARD'>Dash</a></li>
-                <li><a href='NEWHABITPAGE'>+</a></li>
+                <li><a href='dash.html'>Dash</a></li>
+                <li><a href='newhabit.html'>+</a></li>
             </ul>
             
             <li><a href='#'><img id=logo src='' alt='logo'></a></li>
-            <li><a href='LOGINPAGE'>Logout</a></li>
+            <li><a href='index.html'>Logout</a></li>
             
         </ul>
         
@@ -24,12 +25,15 @@
 
     <section class='flex-container' id='list-container'>
         <section class='habitlist'>
+            <h3>Daily</h3>
             <ul id='daily'></ul>
         </section>
         <section class='habitlist'>
+            <h3>Weekly</h3>
             <ul id='weekly'></ul>
         </section>
-        <section class='habitlist' >
+        <section class='habitlist'>
+            <h3>Monthly</h3>
             <ul id='monthly'></ul>
         </section>
     </section>
