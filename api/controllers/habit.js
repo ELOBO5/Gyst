@@ -29,3 +29,14 @@ async function create(req, res) {
         res.status(422).json({err});
     }
 }
+
+async function destroy(req, res) {
+    try {
+        const habit = await Habit.findByHabitId(req.params.id);
+        await habit.destroy();
+        res.status(204).end();
+    } catch (err) {
+        console.error('Could not delete habit');
+        res.status(404).json({err});
+    }
+}
