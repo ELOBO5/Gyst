@@ -19,3 +19,13 @@ async function show(req, res) {
         res.status(404).json({err});
     }
 }
+
+async function create(req, res) {
+    try {
+        const newHabit = await Habit.create(req.body);
+        res.status(201).json(newHabit);
+    } catch (err) {
+        console.error('Could not create habit');
+        res.status(422).json({err});
+    }
+}
