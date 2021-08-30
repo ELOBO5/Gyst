@@ -3,6 +3,7 @@
 
 // Create habit on dashboard
 
+
 const postHabit = event => {
     event.preventDefault();
     const habitEntry = document.querySelector('#habit-entry').value;
