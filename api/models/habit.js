@@ -7,8 +7,8 @@ class Habit {
     this.frequency = data.frequency;
     this.has_priority = data.has_priority;
     this.created_at = data.created_at;
-    this.habit_count = 0;
-    this.habit_streak = 0;
+		this.habit_count = data.habit_count || 0;
+		this.habit_streak = data.habit_streak || 0;
     this.user_id = data.user_id;
   }
 
@@ -69,6 +69,22 @@ class Habit {
       }
     });
   }
+
+  update(body) {
+		return new Promise(async (resolve, reject) => {
+			try {
+				const { habit, frequency, has_priority, habit_count, habit_streak } = body;
+				const data = await db.query(
+					`UPDATE habits SET habit = $1, frequency = $2, has_priority = $3, habit_count = $4, habit_streak = $5 WHERE id = $6 RETURNING *;`,
+					[habit, frequency, has_priority, habit_count, habit_streak, this.id]
+				);
+				const updatedHabit = new Habit(data.rows[0]);
+				resolve(updatedHabit);
+			} catch (error) {
+				reject('Habit could not be updated');
+			}
+		});
+	}
 
   destroy() {
     return new Promise(async (res, rej) => {
