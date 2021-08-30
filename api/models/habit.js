@@ -54,13 +54,13 @@ class Habit {
     });
   }
 
-  static create(habit, frequency, has_priority, user_id) {
+  static create(habitData) {
     return new Promise(async (resolve, reject) => {
       try {
         let created_at = new Date().toISOString().slice(0, 10);
         let result = await db.query(
           `INSERT INTO habits (habit, frequency, has_priority, created_at, user_id) VALUES ($1, $2, $3, ${created_at}, $5) RETURNING *;`,
-          [habit, frequency, has_priority, user_id]
+          [habitData.habit, habitData.frequency, habitData.has_priority, habitData.user_id]
         );
 
         resolve(result.rows[0]);
