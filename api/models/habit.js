@@ -69,6 +69,17 @@ class Habit {
       }
     });
   }
+
+  destroy() {
+    return new Promise(async (res, rej) => {
+      try {
+          await db.query('DELETE FROM habits WHERE id = $1;', [this.id]);
+          res('Habit was deleted');
+      } catch (err) {
+          rej('Habit could not be deleted');
+      }
+    })
+  }
 }
 
 module.exports = Habit;
