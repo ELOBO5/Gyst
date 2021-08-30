@@ -30,6 +30,17 @@ async function create(req, res) {
     }
 }
 
+async function update(req, res) {
+	try {
+		const habit = await Habit.findByHabitId(req.params.id);
+		const updatedHabit = await habit.update(req.body);
+		res.status(200).json(updatedHabit);
+	} catch (error) {
+		console.error('Could not update habit');
+		res.status(404).json({ err });
+	}
+}
+
 async function destroy(req, res) {
     try {
         const habit = await Habit.findByHabitId(req.params.id);
@@ -41,4 +52,4 @@ async function destroy(req, res) {
     }
 }
 
-module.exports = {index, show, create, destroy};
+module.exports = { index, show, create, update, destroy };
