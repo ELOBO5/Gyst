@@ -7,8 +7,8 @@
     "start": "node index.js",
     "dev": "nodemon index.js",
     "seedDev": "node dbConfig/seedDev.js",
-    "test": "jest --setupFiles ./tests/integration/config.js --detectOpenHandles",
-    "coverage": "jest --setupFiles ./tests/integration/config.js --detectOpenHandles --coverage"
+    "test": "jest --setupFiles ./tests/integration/config.js --verbose",
+    "coverage": "jest --setupFiles ./tests/integration/config.js --coverage --verbose"
   },
   "keywords": [],
   "author": "",
