@@ -6,7 +6,9 @@
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js",
-    "seedDev": "node dbConfig/seedDev.js"
+    "seedDev": "node dbConfig/seedDev.js",
+    "test": "jest --setupFiles ./tests/integration/config.js --detectOpenHandles",
+    "coverage": "jest --setupFiles ./tests/integration/config.js --detectOpenHandles --coverage"
   },
   "keywords": [],
   "author": "",
@@ -20,7 +22,7 @@
     "pg": "^8.7.1"
   },
   "devDependencies": {
-    "jest": "^27.0.6",
+    "jest": "^27.1.0",
     "nodemon": "^2.0.12",
     "supertest": "^6.1.6"
   }
