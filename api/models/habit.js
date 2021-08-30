@@ -28,7 +28,7 @@ class Habit {
     return new Promise(async (resolve, reject) => {
       try {
         let habitData = await db.query(
-          `SELECT * FROM habits WHERE id = ${id};`,
+          `SELECT * FROM habits WHERE id = $1;`,
           [id]
         );
         let habit = new Habit(habitData.rows[0]);
@@ -43,7 +43,7 @@ class Habit {
     return new Promise(async (resolve, reject) => {
       try {
         let habitData = await db.query(
-          `SELECT * FROM habits WHERE user_id = ${user_id};`,
+          `SELECT * FROM habits WHERE user_id = $1;`,
           [user_id]
         );
         let habit = new Habit(habitData.rows[0]);
