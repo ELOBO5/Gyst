@@ -20,7 +20,7 @@ const addHabitToDocument = (habit, frequency) => {
 
 	habitListItem.textContent = habit.habit;
 	checkbox.checked = habit.completed;
-	streakListItem.textContent = habit.habit_streak;
+	streakListItem.textContent = '🔥' + habit.habit_streak;
 
 	completedListItem.appendChild(checkbox);
 	individualContainer.appendChild(habitListItem);

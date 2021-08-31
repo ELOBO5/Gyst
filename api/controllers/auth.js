@@ -27,14 +27,14 @@ router.post("/login", async (req, res) => {
     }
     const authed = bcrypt.compare(req.body.password, user.password);
     if (!!authed) {
-      const payload = { username: user.username, email: user.email };
+      const payload = { username: user.username, email: user.email, id: user.id};
       const sendToken = (err, token) => {
         if (err) {
           throw new Error("Error in token generation");
         }
         res.status(200).json({ success: true, token: "Bearer " + token });
       };
-      jwt.sign(payload, process.env.SECRET, { expiresIn: 60 }, sendToken);
+      jwt.sign(payload, process.env.SECRET, sendToken);
     } else {
       throw new Error("User could not be authenticated");
     }
