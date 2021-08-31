@@ -1,4 +1,5 @@
 const router = require("express").Router();
+require("dotenv").config();
 
 const habitsController = require("../controllers/habits.js");
 
