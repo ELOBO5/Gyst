@@ -14,6 +14,13 @@ describe('Habit Endpoints', () => {
         api.close(done);
     })
 
+    test('responds to get / with 200 and gets the welcome message', async () => {
+        const res = await request(api).get('/');
+        
+        expect(res.statusCode).toEqual(200);
+        expect(res.text).toEqual('Welcome to our habit tracker!');
+    })
+
     test('returns list of all habits', async () => {
         const res = await request(api).get('/habits');
 
