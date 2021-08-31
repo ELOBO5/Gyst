@@ -75,4 +75,23 @@ describe('Habit Endpoints', () => {
         expect(newHabitRes.body).toBeTruthy();
         expect(newHabitRes.body.habit).toEqual('create test habit');
     })
+
+    test('does not create a new habit with more than 50 characters', async () => {
+        const tooLongHabitData = {
+            habit: 'This habit description has 51 characters. abcdefhij',
+            frequency: 'daily',
+            has_priority: true,
+            user_id: 99
+        }
+
+        const res = await request(api)
+            .post('/habits')
+            .send(tooLongHabitData)
+        
+        expect(res.statusCode).toEqual(422);
+        expect(res.body).toHaveProperty('err');
+
+        const newHabitRes = await request(api).get(`/habits/${res.body.id}`);
+        expect(newHabitRes.statusCode).toEqual(404);
+    })
 })
