@@ -6,8 +6,8 @@ CREATE TABLE habits (
     frequency VARCHAR (50) NOT NULL,
     has_priority BOOLEAN NOT NULL,
     created_at DATE NOT NULL,
-    habit_count INT NOT NULL,
-    habit_streak INT NOT NULL,
+    habit_count INT NOT NULL DEFAULT 0,
+    habit_streak INT NOT NULL DEFAULT 0,
     completed BOOLEAN DEFAULT false,
     user_id INT NOT NULL
 );
