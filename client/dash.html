@@ -7,6 +7,8 @@
     <title>GYST</title>
     <link rel='stylesheet' href="static/css/shared.css">
     <link rel='stylesheet' href="static/css/dash.css">
+    <link rel="icon" href="static/images/tempfavicon.PNG">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
 </head>
 <body>
     <nav>
@@ -16,7 +18,7 @@
                 <li><a href='newhabit.html'>+</a></li>
             </ul>
             
-            <li><a href='#'><img id=logo src='' alt='logo'></a></li>
+            <li><img id=gystlogo src='./static/images/GYSTLOGO.PNG' alt='logo'></li>
             <li><a href='index.html'>Logout</a></li>
             
         </ul>
@@ -26,7 +28,13 @@
     <section class='flex-container' id='list-container'>
         <section class='habitlist'>
             <h3>Daily</h3>
-            <ul id='daily'></ul>
+            <ul id='daily'>
+                <ul class='indvHabitContainer'>
+                    <li class='habitListItem habit'>Go for a run</li>
+                    <li class='habitListItem buttonplaceholder'><button class='markAsDone'>Done</button></li>
+                    <li class='habitListItem streakCounter'>3</li>
+                </ul>
+            </ul>
         </section>
         <section class='habitlist'>
             <h3>Weekly</h3>
@@ -42,7 +50,7 @@
 
     <footer class='flex-container'>
         <ul class = 'foot outer'>
-            <li><a href='GITREPT'>GYST aka Get Your Shit Together! Bought to you by Tobi, Tegan, Gorazd and Elicia <img src='GITLOGO'></a></li>
+            <li><a href='https://github.com/ELOBO5/Gyst'>GYST aka Get Your Shit Together! Bought to you by Tobi, Tegan, Gorazd and Elicia <img id='github' src='./static/images/github-logo.png'></a></li>
         </ul>
     </footer>
         

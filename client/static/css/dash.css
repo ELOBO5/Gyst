@@ -26,3 +26,25 @@ h3{
     text-decoration: underline;
 }
 
+.indvHabitContainer{
+    list-style-type: none;
+    margin: 0;
+    padding: 5px;
+    color: white;
+    
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-around;
+    align-items: center;
+}
+}
+
+.habitListItem{
+    display:inline-block;
+    color: white;
+    text-align: center;
+
+    
+}
+
+
