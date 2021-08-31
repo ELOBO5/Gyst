@@ -16,7 +16,7 @@ class Habit {
   static get all() {
     return new Promise(async (resolve, reject) => {
       try {
-        let result = await db.query(`SELECT * FROM habits;`);
+        let result = await db.query(`SELECT * FROM habits ORDER BY id ASC;`);
         let habits = result.rows.map((r) => new Habit(r));
         resolve(habits);
       } catch (err) {
