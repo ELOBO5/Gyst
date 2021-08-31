@@ -95,4 +95,13 @@ describe('Habit Endpoints', () => {
         expect(newHabitRes.statusCode).toEqual(404);
         expect(newHabitRes.body).toHaveProperty('err');
     })
+
+    test('deletes habit', async () => {
+        const res = await request(api).delete('/habits/2');
+        expect(res.statusCode).toEqual(204);
+
+        const deletedHabitRes = await request(api).get('/habits/2');
+        expect(deletedHabitRes.statusCode).toEqual(404);
+        expect(deletedHabitRes.body).toHaveProperty('err');
+    })
 })
