@@ -16,13 +16,16 @@ describe('Habit Endpoints', () => {
 
     test('returns list of all habits', async () => {
         const res = await request(api).get('/habits');
+
         expect(res.statusCode).toEqual(200);
         expect(res.body.length).toEqual(5);
     })
 
     test('returns a particular habit by id', async () => {
         const res = await request(api).get('/habits/3');
+
         expect(res.statusCode).toEqual(200);
+
         expect(res.body.id).toEqual(3);
         expect(res.body.habit).toEqual('1 third habit');
         expect(res.body.frequency).toEqual('monthly');
@@ -37,6 +40,12 @@ describe('Habit Endpoints', () => {
         expect(res.body.user_id).toEqual(1);
     })
 
+    test('responds to non existent paths with 404', async () => {
+        const res = await request(api).get('/asdf');
+        
+        expect(res.statusCode).toEqual(404);
+    });
+
     test('creates a new habit', async () => {
         const habitData = {
             habit: 'create test habit',
@@ -50,6 +59,7 @@ describe('Habit Endpoints', () => {
             .send(habitData)
         
         expect(res.statusCode).toEqual(201);
+
         expect(res.body).toHaveProperty('id');
         expect(res.body).toHaveProperty('created_at');
         expect(res.body.habit).toEqual('create test habit');
