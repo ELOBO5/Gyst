@@ -34,11 +34,12 @@ function createPost(data) {
     indvHabitContainer.setAttribute('class', 'habitContainer');
     habit.setAttribute('class', 'habitListItem habit');
     buttonplaceholder.setAttribute('class', 'habitListItem buttonplaceholder')
-    markAsDone.setAttribute('class', 'markAsDoneButton')
+    markAsDone.setAttributes('class', 'markAsDoneButton's)
     streakCounter.setAttribute('class', 'habitListItem streakCounter')
 
     habit.textContent = data.habitEntry;
-    entries.style.outline = 'transparent';
+    button.value = 
+    indvHabitContainer.style.outline = 'transparent';
 
     indvHabitContainer.appendChild(habit);
     indvHabitContainer.appendChild(buttonplaceholder);
