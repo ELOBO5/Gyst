@@ -44,7 +44,7 @@ describe('Habit Endpoints', () => {
         const res = await request(api).get('/asdf');
         
         expect(res.statusCode).toEqual(404);
-    });
+    })
 
     test('creates a new habit', async () => {
         const habitData = {
@@ -69,5 +69,10 @@ describe('Habit Endpoints', () => {
         expect(res.body.habit_streak).toEqual(0);
         expect(res.body.completed).toEqual(false);
         expect(res.body.user_id).toEqual(44);
+
+        const newHabitRes = await request(api).get(`/habits/${res.body.id}`);
+        expect(newHabitRes.statusCode).toEqual(200);
+        expect(newHabitRes.body).toBeTruthy();
+        expect(newHabitRes.body.habit).toEqual('create test habit');
     })
 })
