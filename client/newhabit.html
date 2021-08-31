@@ -7,6 +7,7 @@
     <title>GYST</title>
     <link rel='stylesheet' href="static/css/newhabit.css">
     <link rel='stylesheet' href="static/css/shared.css">
+    <script defer src='static/js/newhabit.js'></script>
 </head>
 <body>
     <nav>
@@ -28,17 +29,17 @@
        <input type="text" id="habit-entry" name="habit" placeholder="What would you like to track...?" size='40' maxlength='40' autofocus required><br>
 
        <label for="frequency">Frequency: </label>
-       <select id="frequency" name="frequency">
+       <select id="habit-frequency" name="frequency">
            <option value="Daily">Daily</option>
            <option value="Weekly">Weekly</option>
            <option value="Monthly">Monthly</option>
         </select><br>
 
         <label for="priority"> Is this a priority?</label>
-        <input type="checkbox" id="priority" name="priority" value="priority"><br>
+        <input type="checkbox" id="habit-priority" name="priority" value="priority"><br>
         
 
-        <input type="submit" value="Track it!">
+        <input type="submit" value="Track it!" id=submitNewHabit>
 
     </form>
 
