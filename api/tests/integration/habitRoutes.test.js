@@ -33,6 +33,31 @@ describe('Habit Endpoints', () => {
 
         expect(res.body.habit_count).toEqual(6);
         expect(res.body.habit_streak).toEqual(0);
+        expect(res.body.completed).toEqual(false);
         expect(res.body.user_id).toEqual(1);
+    })
+
+    test('creates a new habit', async () => {
+        const habitData = {
+            habit: 'create test habit',
+            frequency: 'weekly',
+            has_priority: false,
+            user_id: 44
+        }
+
+        const res = await request(api)
+            .post('/habits')
+            .send(habitData)
+        
+        expect(res.statusCode).toEqual(201);
+        expect(res.body).toHaveProperty('id');
+        expect(res.body).toHaveProperty('created_at');
+        expect(res.body.habit).toEqual('create test habit');
+        expect(res.body.frequency).toEqual('weekly');
+        expect(res.body.has_priority).toEqual(false);
+        expect(res.body.habit_count).toEqual(0);
+        expect(res.body.habit_streak).toEqual(0);
+        expect(res.body.completed).toEqual(false);
+        expect(res.body.user_id).toEqual(44);
     })
 })
