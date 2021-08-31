@@ -34,7 +34,7 @@ function createPost(data) {
     indvHabitContainer.setAttribute('class', 'habitContainer');
     habit.setAttribute('class', 'habitListItem habit');
     buttonplaceholder.setAttribute('class', 'habitListItem buttonplaceholder')
-    markAsDone.setAttributes('class', 'markAsDoneButton's)
+    markAsDone.setAttributes('class', 'markAsDoneButton')
     streakCounter.setAttribute('class', 'habitListItem streakCounter')
 
     habit.textContent = data.habitEntry;
