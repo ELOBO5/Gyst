@@ -25,7 +25,7 @@ router.post("/login", async (req, res) => {
     if (!user) {
       throw new Error("No user with this email");
     }
-    const authed = bcrypt.compare(req.body.password, user.password);
+    const authed = await bcrypt.compare(req.body.password, user.password);
     if (!!authed) {
       const payload = { username: user.username, email: user.email };
       const sendToken = (err, token) => {
@@ -34,7 +34,7 @@ router.post("/login", async (req, res) => {
         }
         res.status(200).json({ success: true, token: "Bearer " + token });
       };
-      jwt.sign(payload, process.env.SECRET, { expiresIn: 60 }, sendToken);
+      jwt.sign(payload, process.env.SECRET, { expiresIn: 3600 }, sendToken);
     } else {
       throw new Error("User could not be authenticated");
     }
