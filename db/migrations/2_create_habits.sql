@@ -8,5 +8,6 @@ CREATE TABLE habits (
     created_at DATE NOT NULL,
     habit_count INT NOT NULL,
     habit_streak INT NOT NULL,
+    completed BOOLEAN DEFAULT false,
     user_id INT NOT NULL
 );
