@@ -98,7 +98,6 @@ const toggleCompleted = async habit => {
 const dailyReset = async habit => {
 	const today = new Date();
 	const time = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
-	console.log('time ', time)
 
 	const url = `${BASE_URL}/${habit.id}/reset`;
 
@@ -144,7 +143,7 @@ const dailyReset = async habit => {
 	}
 };
 
-const mapThroughHabits = habits => {
+const resetAllHabits = habits => {
 	habits.map(habit => dailyReset(habit));
 }
 
@@ -163,4 +162,4 @@ const deleteHabit = async id => {
 
 
 getAllHabits();
-setInterval(() =>mapThroughHabits(allHabits), 1000);
+setInterval(() =>resetAllHabits(allHabits), 1000);
