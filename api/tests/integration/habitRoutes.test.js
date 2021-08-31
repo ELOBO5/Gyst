@@ -93,5 +93,6 @@ describe('Habit Endpoints', () => {
 
         const newHabitRes = await request(api).get(`/habits/${res.body.id}`);
         expect(newHabitRes.statusCode).toEqual(404);
+        expect(newHabitRes.body).toHaveProperty('err');
     })
 })
