@@ -8,6 +8,7 @@ const addHabitToDocument = (habit, frequency) => {
 	const habitListItem = document.createElement('li');
 	const completedListItem = document.createElement('li');
 	const streakListItem = document.createElement('li');
+	const deleteItem = document.createElement('li')
 	const checkbox = document.createElement('input');
 
 	individualContainer.setAttribute('class', 'indvHabitContainer');
@@ -15,21 +16,23 @@ const addHabitToDocument = (habit, frequency) => {
 	completedListItem.setAttribute('class', 'habitListItem');
 	streakListItem.setAttribute('class', 'habitListItem');
 	streakListItem.setAttribute('class', `streakCounter${habit.id}`);
+	deleteItem.setAttribute('class', 'habitListItem');
 	checkbox.setAttribute('type', 'checkbox');
 	checkbox.setAttribute('class', 'markAsDone');
 
 	habitListItem.textContent = habit.habit;
 	checkbox.checked = habit.completed;
-	streakListItem.textContent = habit.habit_streak;
+	streakListItem.textContent = '🔥 ' + habit.habit_streak;
+	deleteItem.innerHTML = '&#128465;';
+	
 
 	completedListItem.appendChild(checkbox);
 	individualContainer.appendChild(habitListItem);
 	individualContainer.appendChild(completedListItem);
 	individualContainer.appendChild(streakListItem);
+	individualContainer.appendChild(deleteItem);
 	habitMainContainer.appendChild(individualContainer);
 
-	// TODO: - Create edit button and event listener to 'updateInfo' event
-	// TODO: - Add event listener to checkbox
 	const toggleHabit = {
 		id: habit.id,
 		completed: !habit.completed,
@@ -37,6 +40,7 @@ const addHabitToDocument = (habit, frequency) => {
 	};
 
 	checkbox.addEventListener('click', () => toggleCompleted(toggleHabit));
+	deleteItem.addEventListener('click', () => deleteHabit(habit.id ));
 };
 
 const getAllHabits = async () => {
@@ -54,26 +58,6 @@ const getAllHabits = async () => {
 };
 
 /**
- * @param {object} habit should contain `id`, `habit`, `frequency` and `has_priority` keys.
- */
-const updateHabitInfo = async habit => {
-	try {
-		const options = {
-			method: 'PATCH',
-			headers: { 'Content-Type': 'application/json' },
-			body: JSON.stringify(habit)
-		};
-
-		const response = await fetch(`${BASE_URL}/${habit.id}/info`, options);
-		const data = await response.json();
-
-		// TODO: - Use the 'data' to adjust what's on the page, once HTML has been completed and designed.
-	} catch (error) {
-		console.error('Error updating habit in client');
-	}
-};
-
-/**
  * @param {object} habit should contain `id`, `completed` and  `habit_streak` keys.
  */
 const toggleCompleted = async habit => {
@@ -84,17 +68,17 @@ const toggleCompleted = async habit => {
 			body: JSON.stringify(habit)
 		};
 
-		 const response = await fetch(`${BASE_URL}/${habit.id}/completed`, options);
-		const data = await response.json();
-
-		// TODO: - BELOW
-		// const streakCounter = document.querySelector(`.streakCounter${habit.id}`);
-		// streakCounter.textContent = data.habit_streak;
+		 await fetch(`${BASE_URL}/${habit.id}/completed`, options);
 	} catch (error) {
 		console.error('Error updating habit in client');
 	}
 };
 
+/**
+ * Adjusts the properties of a habit at midnight. If a habit, is marked as completed, the streak continues, otherwise the streak goes back to zero.
+ * The streak count adjusts for monthly, weekly and daily habits accordingly.
+ * @param {object} habit should contain all the properties of the `Habit` model.
+ */
 const dailyReset = async habit => {
 	const today = new Date();
 	const time = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
@@ -145,7 +129,7 @@ const dailyReset = async habit => {
 
 const resetAllHabits = habits => {
 	habits.map(habit => dailyReset(habit));
-}
+};
 
 const deleteHabit = async id => {
 	try {
@@ -159,7 +143,6 @@ const deleteHabit = async id => {
 		console.error('Error deleting habit in client');
 	}
 };
-
 
 getAllHabits();
 setInterval(() =>resetAllHabits(allHabits), 1000);
