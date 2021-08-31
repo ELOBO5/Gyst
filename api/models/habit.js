@@ -28,10 +28,9 @@ class Habit {
   static findByHabitId(id) {
     return new Promise(async (resolve, reject) => {
       try {
-        let habitData = await db.query(
-          `SELECT * FROM habits WHERE id = $1;`,
-          [id]
-        );
+        let habitData = await db.query(`SELECT * FROM habits WHERE id = $1;`, [
+          id,
+        ]);
         let habit = new Habit(habitData.rows[0]);
         resolve(habit);
       } catch (err) {
@@ -60,8 +59,14 @@ class Habit {
       try {
         let created_at = new Date().toISOString().slice(0, 10);
         let result = await db.query(
-          `INSERT INTO habits (habit, frequency, has_priority, created_at, user_id) VALUES ($1, $2, $3, ${created_at}, $5) RETURNING *;`,
-          [habitData.habit, habitData.frequency, habitData.has_priority, habitData.user_id]
+          `INSERT INTO habits (habit, frequency, has_priority, created_at, user_id) VALUES ($1, $2, $3, $4, $5) RETURNING *;`,
+          [
+            habitData.habit,
+            habitData.frequency,
+            habitData.has_priority,
+            created_at,
+            habitData.user_id,
+          ]
         );
 
         resolve(result.rows[0]);
@@ -122,12 +127,12 @@ class Habit {
   destroy() {
     return new Promise(async (res, rej) => {
       try {
-          await db.query('DELETE FROM habits WHERE id = $1;', [this.id]);
-          res('Habit was deleted');
+        await db.query("DELETE FROM habits WHERE id = $1;", [this.id]);
+        res("Habit was deleted");
       } catch (err) {
-          rej('Habit could not be deleted');
+        rej("Habit could not be deleted");
       }
-    })
+    });
   }
 }
 
