@@ -57,6 +57,33 @@ const updateHabitInfo = async habit => {
 	}
 };
 
+const dailyReset = async habit => {
+	const today = new Date();
+	const time = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
+
+	const url = `${BASE_URL}/${habit.id}/reset`;
+
+	const options = {
+		method: 'PUT',
+		headers: { 'Content-Type': 'application/json' }
+	};
+
+	try {
+		if (time === '00:00:0' && !habit.completed) {
+			const response = await fetch(url, {
+				...options,
+				body: JSON.stringify({ habit_streak: 0 })
+			});
+			const data = await response.json();
+		} else if (time === '00:00:0') {
+			const response = await fetch(url, {
+				...options,
+				body: JSON.stringify({ habit_streak: habit.habit_streak++ })
+			});
+			const data = await response.json();
+		}
+	} catch (error) {
+		console.error('Error resetting habit for the day in client');
 	}
 };
 
