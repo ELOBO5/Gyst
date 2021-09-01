@@ -67,7 +67,7 @@ describe('User', () => {
             expect(result).toEqual('User 9901 was deleted');
         })
 
-        test('sadf', async () => {
+        test('returns error notifying failure of deletion on unsuccessful db query', async () => {
             const delUser = new User({id: 9901, username: 'To Be Deleted', email: 'byebye@email.com', password: 'goneforever'});
             try {
                 jest.spyOn(db, 'query').mockRejectedValueOnce(Error());
