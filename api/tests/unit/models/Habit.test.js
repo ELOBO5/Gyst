@@ -189,7 +189,7 @@ describe('Habit', () => {
                 .mockResolvedValueOnce({ rows: [updatedHabitData] });
             
             const habit = new Habit(habitData);
-            const updatedHabit = await habit.toggleCompleted(updates);
+            const updatedHabit = await habit.dailyReset(updates);
 
             expect(updatedHabit).toBeInstanceOf(Habit);
             expect(updatedHabit.completed).toEqual(false);
