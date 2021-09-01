@@ -1,9 +1,20 @@
 const User = require('../models/user.js');
+const Habit = require('../models/habit.js');
 
 async function index(req, res) {
     try {
         const users = await User.all;
         res.status(200).json(users);
+    } catch (err) {
+        console.error('Could not get Users');
+        res.status(500).json({err});
+    }
+}
+
+async function getHabitsForUser(req, res) {
+    try {
+        const habits = await Habit.findByUserId(req.params.user_id);
+        res.status(200).json(habits);
     } catch (err) {
         console.error('Could not get Users');
         res.status(500).json({err});
@@ -41,4 +52,4 @@ async function destroy(req, res) {
     }
 }
 
-module.exports = { index, show, create, destroy };
+module.exports = { index, getHabitsForUser, show, create, destroy };
