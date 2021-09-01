@@ -66,5 +66,15 @@ describe('User', () => {
 
             expect(result).toEqual('User 9901 was deleted');
         })
+
+        test('sadf', async () => {
+            const delUser = new User({id: 9901, username: 'To Be Deleted', email: 'byebye@email.com', password: 'goneforever'});
+            try {
+                jest.spyOn(db, 'query').mockRejectedValueOnce(Error());
+                await delUser.destroy();
+            } catch (err) {
+                expect(err).toEqual('User could not be deleted');
+            }
+        })
     })
 })
