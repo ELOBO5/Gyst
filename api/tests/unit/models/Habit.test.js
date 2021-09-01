@@ -128,5 +128,20 @@ describe('Habit', () => {
             expect(updatedHabit.frequency).toEqual('daily');
             expect(updatedHabit.has_priority).toEqual(true);
         })
+
+        test('returns error notifying failure of update on unsuccessful db query', async () => {
+            const habitData = {id: 15, habit: 'Exercise', frequency: 'monthly', has_priority: true, created_at: '2020-05-05', habit_count: 0, habit_streak: 0, completed: false, user_id: 48};
+            const updates = {habit: 'Sleep', frequency: 'daily', has_priority: true};
+
+            const habit = new Habit(habitData);
+
+            try {
+                jest.spyOn(db, 'query').mockRejectedValueOnce(Error());
+                await habit.updateInfo(updates);
+            } catch (err) {
+                expect(err).toEqual('Habit could not be updated');
+            }
+            
+        })
     })
 })
