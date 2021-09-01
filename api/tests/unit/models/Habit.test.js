@@ -83,4 +83,18 @@ describe('Habit', () => {
             }
         })
     })
+
+    describe('static create', () => {
+        test('creates new habit on successful db query', async () => {
+            const newHabitData = {habit: 'Exercise', frequency: 'weekly', has_priority: false, user_id: 4};
+            const newHabitDataWithAllInfo = {...newHabitData, id: 12, created_at: '2020-05-05', habit_count: 0, habit_streak: 0, completed: false};
+            jest.spyOn(db, 'query')
+                .mockResolvedValueOnce({ rows: [newHabitDataWithAllInfo] });
+
+            const newHabit = await Habit.create(newHabitData);
+
+            expect(newHabit).toBeInstanceOf(Habit);
+            expect(newHabit).toEqual({id: 12, habit: 'Exercise', frequency: 'weekly', has_priority: false, created_at: '2020-05-05', habit_count: 0, habit_streak: 0, completed: false, user_id: 4});
+        })
+    })
 })
