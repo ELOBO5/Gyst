@@ -1,4 +1,14 @@
-const BASE_URL = "http://localhost:3000/habits";
+const BASE_URL = "https://get-your-sht-together.herokuapp.com/habits";
+const USER_URL = "https://get-your-sht-together.herokuapp.com/users";
+
+const token = localStorage.getItem('token');
+
+function checkToken() {
+  if (!token){
+      window.location.href = "http://127.0.0.1:5503/client/index.html";
+      return;
+  }
+}
 
 let allHabits;
 
@@ -94,11 +104,14 @@ const addAnalyticsToDocument = (habit) => {
   statsContainer.appendChild(analyticsListItem);
 };
 
-////
-
 const getAllHabits = async () => {
+  checkToken();
+
+  const userId = localStorage.getItem('id')
+  const authorization = { headers: { authorization: token } };
+
   try {
-    const response = await fetch(BASE_URL);
+    const response = await fetch(`${BASE_URL}/${userId}/habits`, authorization);
     const { habits } = await response.json();
     allHabits = habits;
 
@@ -113,8 +126,6 @@ const getAllHabits = async () => {
   } catch (error) {
     console.error("Error getting all habits from server");
   }
-
-
 };
 
 /**
@@ -124,7 +135,7 @@ const toggleCompleted = async (habit) => {
   try {
     const options = {
       method: "PATCH",
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", authorization: token },
       body: JSON.stringify(habit)
     };
 
@@ -140,6 +151,8 @@ const toggleCompleted = async (habit) => {
  * @param {object} habit should contain all the properties of the `Habit` model.
  */
 const dailyReset = async (habit) => {
+  checkToken();
+
   const today = new Date();
   const time =
     today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
@@ -148,7 +161,7 @@ const dailyReset = async (habit) => {
 
   const options = {
     method: "PATCH",
-    headers: { "Content-Type": "application/json" }
+    headers: { "Content-Type": "application/json", authorization: token }
   };
 
   try {
@@ -211,10 +224,12 @@ const resetAllHabits = (habits) => {
 };
 
 const deleteHabit = async (id) => {
+  checkToken();
+
   try {
     const options = {
       method: "DELETE",
-      headers: { "Content-Type": "application/json" }
+      headers: { "Content-Type": "application/json", authorization: token }
     };
 
     await fetch(`${BASE_URL}/${id}`, options);
