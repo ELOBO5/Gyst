@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="static/css/registration.css" />
+    <script defer src="static/js/registerauth.js"></script>
     <title>Registration</title>
   </head>
   <body>
@@ -16,6 +17,7 @@
         type="text"
         placeholder="Username"
         required
+        name="username"
         maxlength="30"
       />
       <input
@@ -24,6 +26,7 @@
         placeholder="Email"
         required
         maxlength="100"
+        name="email"
       />
       <input
         id="password"
@@ -31,16 +34,9 @@
         placeholder="Password"
         required
         maxlength="100"
-      />
-      <input
-        id="confirm-password"
-        type="password"
-        placeholder="Confirm Password"
-        required
-        maxlength="100"
+        name="password"
       />
       <input type="submit" value="Create Account" />
     </form>
-    <script src="static/js/auth.js"></script>
   </body>
 </html>
