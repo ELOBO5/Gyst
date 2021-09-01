@@ -72,17 +72,17 @@ const addAnalyticsToDocument = (habit) => {
     
 
 	if (habit.habit_counter === 1){
-        analyticsData.textContent = `${habit.habit} - You started this habit yesterday and currently have a streak of ${habit.streak_counter} day`;
+        analyticsData.textContent = `You started this habit yesterday and currently have a streak of ${habit.streak_counter} day`;
     }
     else {
-        analyticsData.textContent = `${habit.habit} - You started this habit ${habit.habit_counter} days ago and currently have a streak of ${habit.streak_counter} days`;
+        analyticsData.textContent = `You started this habit ${habit.habit_counter} days ago and currently have a streak of ${habit.streak_counter} days`;
     };
 	
 	
 	analyticsListItem.appendChild(analyticsItemName);
     analyticsListItem.appendChild(strengthDisplay);
     analyticsListItem.appendChild(strengthPercentage);
-    analyticsListItem.appendChild(analyticsData));
+    analyticsListItem.appendChild(analyticsData);
 	
 
 
