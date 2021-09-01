@@ -108,4 +108,25 @@ describe('Habit', () => {
             }
         })
     })
+
+    describe('updateInfo', () => {
+        test('updates habit, frequency and has_priority on successful db query', async () => {
+            const habitData = {id: 15, habit: 'Exercise', frequency: 'monthly', has_priority: true, created_at: '2020-05-05', habit_count: 0, habit_streak: 0, completed: false, user_id: 48};
+            const updates = {habit: 'Sleep', frequency: 'daily', has_priority: true};
+            let updatedHabitData = habitData;
+            updatedHabitData.habit = updates.habit;
+            updatedHabitData.frequency = updates.frequency;
+            updatedHabitData.has_priority = updates.has_priority;
+            jest.spyOn(db, 'query')
+                .mockResolvedValueOnce({ rows: [updatedHabitData] });
+            
+            const habit = new Habit(habitData);
+            const updatedHabit = await habit.updateInfo(updates);
+
+            expect(updatedHabit).toBeInstanceOf(Habit);
+            expect(updatedHabit.habit).toEqual('Sleep');
+            expect(updatedHabit.frequency).toEqual('daily');
+            expect(updatedHabit.has_priority).toEqual(true);
+        })
+    })
 })
