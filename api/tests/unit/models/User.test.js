@@ -55,4 +55,16 @@ describe('User', () => {
             expect(user.password).toEqual('userpass321');
         })
     })
+
+    describe('destroy', () => {
+        test('returns message notifying success of deletion on successful db query', async () => {
+            const delUser = new User({id: 9901, username: 'To Be Deleted', email: 'byebye@email.com', password: 'goneforever'});
+            jest.spyOn(db, 'query')
+                .mockResolvedValueOnce({id: 9901});
+
+            const result = await delUser.destroy();
+
+            expect(result).toEqual('User 9901 was deleted');
+        })
+    })
 })
