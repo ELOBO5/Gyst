@@ -14,9 +14,10 @@ describe('User', () => {
     describe('static get all', () => {
         test('returns all users on successful db query', async () => {
             jest.spyOn(db, 'query')
-                .mockResolvedValueOnce({ rows: [{}, {}, {}, {}, {}]});
+                .mockResolvedValueOnce({ rows: [{}, {}, {}, {}, {}] });
             
             const all = await User.all;
+
             expect(all.length).toEqual(5);
         })
     })
@@ -26,7 +27,7 @@ describe('User', () => {
             const newUserData = {username: 'New User', email: 'new@email.com', password: 'password123'};
             const newUserDataWithId = {...newUserData, id: 9};
             jest.spyOn(db, 'query')
-                .mockResolvedValueOnce({ rows: [newUserDataWithId]});
+                .mockResolvedValueOnce({ rows: [newUserDataWithId] });
             
             const newUser = await User.create(newUserData);
 
@@ -35,6 +36,23 @@ describe('User', () => {
             expect(newUser.username).toEqual('New User');
             expect(newUser.email).toEqual('new@email.com');
             expect(newUser.password).toEqual('password123');
+        })
+    })
+
+    describe('static findByEmail', () => {
+        test('returns user with particular email on successful db query', async () => {
+            const userData = {id: 42, username: 'User Name', email: 'user@email.com', password: 'userpass321'};
+            const email = userData.email;
+            jest.spyOn(db, 'query')
+                .mockResolvedValueOnce({ rows: [userData] });
+            
+            const user = await User.findByEmail(email);
+
+            expect(user).toBeInstanceOf(User);
+            expect(user.id).toEqual(42);
+            expect(user.username).toEqual('User Name');
+            expect(user.email).toEqual(email);
+            expect(user.password).toEqual('userpass321');
         })
     })
 })
