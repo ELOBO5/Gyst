@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const { verifyToken } = require("../middleware/auth");
-const usersController = require("../controllers/user.js");
+const usersController = require("../controllers/users.js");
 
 router.get("/", usersController.index);
 router.get("/:id", usersController.show);
