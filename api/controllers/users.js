@@ -13,7 +13,7 @@ async function index(req, res) {
 
 async function getHabitsForUser(req, res) {
     try {
-        const habits = await Habit.findByUserId(req.params.user_id);
+        const habits = await Habit.findByUserId(req.params.id);
         res.status(200).json(habits);
     } catch (err) {
         console.error('Could not get Users');
