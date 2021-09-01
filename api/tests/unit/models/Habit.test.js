@@ -176,4 +176,39 @@ describe('Habit', () => {
             }
         })
     })
+
+    describe('dailyReset', () => {
+        test('updates habit_streak, habit_count and completed on successful db query', async () => {
+            const habitData = {id: 17, habit: 'Exercise a bit more', frequency: 'weekly', has_priority: true, created_at: '2020-07-28', habit_count: 5, habit_streak: 3, completed: true, user_id: 50};
+            const updates = {habit_streak: 4};
+            let updatedHabitData = habitData;
+            updatedHabitData.habit_streak = updates.habit_streak;
+            updatedHabitData.completed = false;
+            updatedHabitData.habit_count = ++habitData.habit_count;
+            jest.spyOn(db, 'query')
+                .mockResolvedValueOnce({ rows: [updatedHabitData] });
+            
+            const habit = new Habit(habitData);
+            const updatedHabit = await habit.toggleCompleted(updates);
+
+            expect(updatedHabit).toBeInstanceOf(Habit);
+            expect(updatedHabit.completed).toEqual(false);
+            expect(updatedHabit.habit_streak).toEqual(4);
+            expect(updatedHabit.habit_count).toEqual(6);
+        })
+
+        test('returns error notifying failure of reset on unsuccessful db query', async () => {
+            const habitData = {id: 17, habit: 'Exercise a bit more', frequency: 'weekly', has_priority: true, created_at: '2020-07-28', habit_count: 5, habit_streak: 3, completed: true, user_id: 50};
+            const updates = {habit_streak: 4};
+
+            const habit = new Habit(habitData);
+
+            try {
+                jest.spyOn(db, 'query').mockRejectedValueOnce(Error());
+                await habit.dailyReset(updates);
+            } catch (err) {
+                expect(err).toEqual('Habit could not be reset');
+            }
+        })
+    })
 })
