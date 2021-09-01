@@ -26,8 +26,7 @@ const addHabitToDocument = (habit, frequency) => {
   individualContainer.setAttribute("class", "indvHabitContainer");
   habitListItem.setAttribute("class", "habitListItem");
   completedListItem.setAttribute("class", "habitListItem");
-  streakListItem.setAttribute("class", "habitListItem");
-  streakListItem.setAttribute("class", `streakCounter${habit.id}`);
+  streakListItem.classList.add(`streakCounter${habit.id}`, "habitListItem");
   deleteItem.setAttribute("class", "habitListItem");
   checkbox.setAttribute("type", "checkbox");
   checkbox.setAttribute("class", "markAsDone");
@@ -48,7 +47,7 @@ const addHabitToDocument = (habit, frequency) => {
     id: habit.id,
     completed: !habit.completed,
     habit_streak: habit.completed ? --habit.habit_streak : ++habit.habit_streak,
-	completed_counter: habit.completed ? --habit.completed_counter : ++habitt.completed_counter
+	  completed_counter: habit.completed ? --habit.completed_counter : ++habit.completed_counter
   };
 
   checkbox.addEventListener("click", () => toggleCompleted(toggleHabit));
@@ -58,7 +57,12 @@ const addHabitToDocument = (habit, frequency) => {
 // analytics dash
 // need to add a habit.completed_counter to the database
 const addAnalyticsToDocument = (habit) => {
-  let habitStrengthPercentage = (habit.completed_counter / habit.habit_count) * 100;
+  let habitStrengthPercentage;
+  if (habit.completed === 0 || habit.habit_count === 0) {
+      habitStrengthPercentage = 0;
+  } else {
+      habitStrengthPercentage = (habit.completed_counter / habit.habit_count) * 100;
+  }
 
   const statsContainer = document.getElementById("stats-container");
 
@@ -69,38 +73,38 @@ const addAnalyticsToDocument = (habit) => {
   const analyticsData = document.createElement("p");
 
   analyticsListItem.setAttribute("class", "analyticsListItem");
-  analyticItemName.setAttribute("class", "text title");
+  analyticItemName.classList.add("text", "title");
   strengthDisplay.setAttribute("class", "strengthDisplay");
-  strengthPercentage.setAttribute("class", "percentage text");
-  analyticsData.setAttribute("class", "data text");
+  strengthPercentage.classList.add("percentage", "text");
+  analyticsData.classList.add("data", "text");
 
   analyticItemName.textContent = habit.habit;
-  strengthPercentage.textContent = habitStrengthPercentage;
+  strengthPercentage.textContent = `${habitStrengthPercentage}%`;
 
 	if (habit.habit_count === 1){
-        analyticsData.textContent = `You started this habit yesterday and currently have a streak of ${habit.streak_count} day`;
+        analyticsData.textContent = `You started this habit yesterday and currently have a streak of ${habit.habit_streak} day`;
     }
     else {
-        analyticsData.textContent = `You started this habit ${habit.habit_count} days ago and currently have a streak of ${habit.streak_count} days`;
+        analyticsData.textContent = `You started this habit ${habit.habit_count} days ago and currently have a streak of ${habit.habit_streak} days`;
     };
 	
 	
-	analyticsListItem.appendChild(analyticsItemName);
-    analyticsListItem.appendChild(strengthDisplay);
-    analyticsListItem.appendChild(strengthPercentage);
-    analyticsListItem.appendChild(analyticsData);
-
+	analyticsListItem.appendChild(analyticItemName);
+  analyticsListItem.appendChild(strengthDisplay);
+  analyticsListItem.appendChild(strengthPercentage);
+  analyticsListItem.appendChild(analyticsData);
+  
   // color coded habit strength indicator
-
+  
   let habitStrengthScale = habitStrengthPercentage / 10;
-  const strengthDisplayContainer = document.querySelector(".strengthDisplay");
-
-  for (let i = 0; i < habitStrengthScale; i++) {
+  
+  for (let i = 1; i <= habitStrengthScale; i++) {
     const strengthBlock = document.createElement("p");
-    strengthBlock.setAtrribute("class", `powerblock block${x}`);
-
-    strengthDisplayContainer.appendChild(strengthBlock);
-  }
+    strengthBlock.classList.add("powerblock",  `block${i}`);
+    strengthDisplay.appendChild(strengthBlock);
+    console.log('block ', strengthBlock);
+  };
+  
   statsContainer.appendChild(analyticsListItem);
 };
 
@@ -111,20 +115,37 @@ const getAllHabits = async () => {
   const authorization = { headers: { authorization: token } };
 
   try {
-    const response = await fetch(`${BASE_URL}/${userId}/habits`, authorization);
-    const { habits } = await response.json();
+    const response = await fetch(`${USER_URL}/${userId}/habits`, authorization);
+    const habits= await response.json();
     allHabits = habits;
 
-    for (const habit of habits) {
-      addHabitToDocument(habit, habit.frequency);
-    }
-
-	for(const habit of habits) {
-		if (habit.has_priority){
-		addAnalyticsToDocument(habit);
-	}}
+    habits.forEach(habit => {
+      const frequency = habit.frequency.toLowerCase();
+      addHabitToDocument(habit, frequency);
+    })
   } catch (error) {
     console.error("Error getting all habits from server");
+  }
+};
+
+const getAnalytics = async () => {
+  checkToken();
+
+  const userId = localStorage.getItem('id')
+  const authorization = { headers: { authorization: token } };
+
+  try {
+    const response = await fetch(`${USER_URL}/${userId}/habits`, authorization);
+    const habits= await response.json();
+    allHabits = habits;
+
+    habits.forEach(habit => {
+      if (habit.has_priority){
+        addAnalyticsToDocument(habit);
+      }
+    })
+  } catch (error) {
+    console.error("Error getting habit analytics from server");
   }
 };
 
@@ -247,4 +268,5 @@ const logoutButton = document.getElementById('logout');
 logoutButton.addEventListener('click', logout);
 
 getAllHabits();
+getAnalytics();
 setInterval(() => resetAllHabits(allHabits), 1000);
