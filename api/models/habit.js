@@ -127,8 +127,8 @@ class Habit {
   destroy() {
     return new Promise(async (res, rej) => {
       try {
-        await db.query("DELETE FROM habits WHERE id = $1;", [this.id]);
-        res("Habit was deleted");
+        const result = await db.query("DELETE FROM habits WHERE id = $1 RETURNING id;", [this.id]);
+        res(`Habit ${result.id} was deleted`);
       } catch (err) {
         rej("Habit could not be deleted");
       }
