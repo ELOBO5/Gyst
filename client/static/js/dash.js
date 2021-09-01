@@ -238,5 +238,13 @@ const deleteHabit = async (id) => {
   }
 };
 
+function logout() {
+  localStorage.clear();
+  window.location.href = "http://127.0.0.1:5503/client/index.html";
+}
+
+const logoutButton = document.getElementById('logout');
+logoutButton.addEventListener('click', logout);
+
 getAllHabits();
 setInterval(() => resetAllHabits(allHabits), 1000);
