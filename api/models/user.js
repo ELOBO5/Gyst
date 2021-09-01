@@ -20,9 +20,10 @@ class User {
     });
   }
 
-  static create({ username, email, password }) {
+  static create(userData) {
     return new Promise(async (res, rej) => {
       try {
+        const { username, email, password } = userData;
         let result = await db.query(
           `INSERT INTO users (username, email, password) VALUES ($1, $2, $3) RETURNING *;`,
           [username, email, password]
