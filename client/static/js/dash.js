@@ -37,7 +37,8 @@ const addHabitToDocument = (habit, frequency) => {
   const toggleHabit = {
     id: habit.id,
     completed: !habit.completed,
-    habit_streak: habit.completed ? --habit.habit_streak : ++habit.habit_streak
+    habit_streak: habit.completed ? --habit.habit_streak : ++habit.habit_streak,
+	completed_counter: habit.completed ? --habit.completed_counter : ++habitt.completed_counter
   };
 
   checkbox.addEventListener("click", () => toggleCompleted(toggleHabit));
@@ -47,8 +48,7 @@ const addHabitToDocument = (habit, frequency) => {
 // analytics dash
 // need to add a habit.completed_counter to the database
 const addAnalyticsToDocument = (habit) => {
-  let habitStrengthPercentage =
-    (habit.completed_counter / habit.habit_counter) * 100;
+  let habitStrengthPercentage = (habit.completed_counter / habit.habit_count) * 100;
 
   const statsContainer = document.getElementById("stats-container");
 
@@ -67,11 +67,11 @@ const addAnalyticsToDocument = (habit) => {
   analyticItemName.textContent = habit.habit;
   strengthPercentage.textContent = habitStrengthPercentage;
 
-	if (habit.habit_counter === 1){
-        analyticsData.textContent = `You started this habit yesterday and currently have a streak of ${habit.streak_counter} day`;
+	if (habit.habit_count === 1){
+        analyticsData.textContent = `You started this habit yesterday and currently have a streak of ${habit.streak_count} day`;
     }
     else {
-        analyticsData.textContent = `You started this habit ${habit.habit_counter} days ago and currently have a streak of ${habit.streak_counter} days`;
+        analyticsData.textContent = `You started this habit ${habit.habit_count} days ago and currently have a streak of ${habit.streak_count} days`;
     };
 	
 	
@@ -105,13 +105,20 @@ const getAllHabits = async () => {
     for (const habit of habits) {
       addHabitToDocument(habit, habit.frequency);
     }
+
+	for(const habit of habits) {
+		if (habit.has_priority){
+		addAnalyticsToDocument(habit);
+	}}
   } catch (error) {
     console.error("Error getting all habits from server");
   }
+
+
 };
 
 /**
- * @param {object} habit should contain `id`, `completed` and  `habit_streak` keys.
+ * @param {object} habit should contain `id`, `completed`, `habit_streak` and `completed_counter` keys.
  */
 const toggleCompleted = async (habit) => {
   try {

@@ -10,6 +10,7 @@ class Habit {
 		this.habit_count = data.habit_count || 0;
 		this.habit_streak = data.habit_streak || 0;
     this.completed = data.completed;
+    this.completed_counter = data.completed_counter || 0;
     this.user_id = data.user_id;
   }
 
@@ -95,10 +96,10 @@ class Habit {
   toggleCompleted(body) {
 		return new Promise(async (resolve, reject) => {
 			try {
-				const { completed, habit_streak } = body;
+				const { completed, habit_streak, completed_counter } = body;
 				const data = await db.query(
-					`UPDATE habits SET completed = $1, habit_streak = $2 WHERE id = $3 RETURNING *;`,
-					[completed, habit_streak, this.id]
+					`UPDATE habits SET completed = $1, habit_streak = $2, completed_counter = $4 WHERE id = $3 RETURNING *;`,
+					[completed, habit_streak, this.id, completed_counter]
 				);
 				const updatedHabit = new Habit(data.rows[0]);
 				resolve(updatedHabit);
