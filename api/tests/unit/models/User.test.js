@@ -54,6 +54,18 @@ describe('User', () => {
             expect(user.email).toEqual(email);
             expect(user.password).toEqual('userpass321');
         })
+
+        test('returns error notifying failure of retrieval on unsuccessful db query', async () => {
+            const userData = {id: 42, username: 'User Name', email: 'user@email.com', password: 'userpass321'};
+            const email = userData.email;
+
+            try {
+                jest.spyOn(db, 'query').mockRejectedValueOnce(Error());
+                await User.findByEmail(email);
+            } catch (err) {
+                expect(err).toContain('Error retrieving user:');
+            }
+        })
     })
 
     describe('destroy', () => {
@@ -69,6 +81,7 @@ describe('User', () => {
 
         test('returns error notifying failure of deletion on unsuccessful db query', async () => {
             const delUser = new User({id: 9901, username: 'To Be Deleted', email: 'byebye@email.com', password: 'goneforever'});
+            
             try {
                 jest.spyOn(db, 'query').mockRejectedValueOnce(Error());
                 await delUser.destroy();
