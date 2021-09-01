@@ -20,6 +20,15 @@ describe('User', () => {
 
             expect(all.length).toEqual(5);
         })
+
+        test('returns error notifying failure of retrieval on unsuccessful db query', async () => {
+            try {
+                jest.spyOn(db, 'query').mockRejectedValueOnce(Error());
+                await User.all;
+            } catch (err) {
+                expect(err).toContain('Error retrieving users:');
+            }
+        })
     })
 
     describe('static create', () => {
@@ -36,6 +45,17 @@ describe('User', () => {
             expect(newUser.username).toEqual('New User');
             expect(newUser.email).toEqual('new@email.com');
             expect(newUser.password).toEqual('password123');
+        })
+
+        test('returns error notifying failure of creation on unsuccessful db query', async () => {
+            const newUserData = {username: 'New User', email: 'new@email.com', password: 'password123'};
+
+            try {
+                jest.spyOn(db, 'query').mockRejectedValueOnce(Error());
+                await User.create(newUserData);
+            } catch (err) {
+                expect(err).toContain('Error creating user:');
+            }
         })
     })
 
