@@ -42,12 +42,12 @@ class Habit {
   static findByUserId(user_id) {
     return new Promise(async (resolve, reject) => {
       try {
-        let habitData = await db.query(
+        let habitsData = await db.query(
           `SELECT * FROM habits WHERE user_id = $1;`,
           [user_id]
         );
-        let habit = new Habit(habitData.rows[0]);
-        resolve(habit);
+        let habits = habitsData.rows.map(h => new Habit(h));
+        resolve(habits);
       } catch (err) {
         reject("User not found");
       }
