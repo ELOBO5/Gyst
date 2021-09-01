@@ -37,14 +37,17 @@ h3{
     justify-content: space-around;
     align-items: center;
 }
-}
+
 
 .habitListItem{
     display:inline-block;
     color: white;
     text-align: center;
+    cursor: pointer;
+}
 
-    
+.habitListItem > input[type="checkbox"] {
+    cursor: pointer;
 }
 
 
