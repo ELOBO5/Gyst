@@ -49,6 +49,17 @@ class User {
       }
     });
   }
+
+  destroy() {
+    return new Promise(async (res, rej) => {
+      try {
+        const result = await db.query("DELETE FROM users WHERE id = $1 RETURNING id;", [this.id]);
+        res(`User ${result.id} was deleted`);
+      } catch (err) {
+        rej("User could not be deleted");
+      }
+    });
+  }
 }
 
 module.exports = User;
