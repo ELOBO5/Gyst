@@ -6,7 +6,6 @@ class Habit {
     this.habit = data.habit;
     this.frequency = data.frequency;
     this.has_priority = data.has_priority;
-    this.created_at = data.created_at;
     this.habit_count = data.habit_count || 0;
     this.habit_streak = data.habit_streak || 0;
     this.completed = data.completed;
@@ -58,14 +57,12 @@ class Habit {
   static create(habitData) {
     return new Promise(async (resolve, reject) => {
       try {
-        let created_at = new Date().toISOString().slice(0, 10);
         let result = await db.query(
-          `INSERT INTO habits (habit, frequency, has_priority, created_at, user_id) VALUES ($1, $2, $3, $4, $5) RETURNING *;`,
+          `INSERT INTO habits (habit, frequency, has_priority, user_id) VALUES ($1, $2, $3, $4) RETURNING *;`,
           [
             habitData.habit,
             habitData.frequency,
             habitData.has_priority,
-            created_at,
             habitData.user_id
           ]
         );
