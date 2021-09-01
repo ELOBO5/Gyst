@@ -33,10 +33,5 @@ function login(token) {
   window.location.href = "http://127.0.0.1:5503/client/dash.html";
 }
 
-function logout() {
-  localStorage.clear();
-  window.location.href = "http://127.0.0.1:5503/client/index.html";
-}
-
 const loginForm = document.querySelector("form#login");
 loginForm.addEventListener("submit", requestLogin);
