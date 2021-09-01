@@ -21,5 +21,17 @@ describe('Habits Controller', () => {
             expect(mockStatus).toHaveBeenCalledWith(200);
             expect(mockJson).toHaveBeenCalledWith(['habit1', 'habit2']);
         })
+
+        test('returns error with a 500 status code', async () => {
+            try {
+                jest.spyOn(Habit, 'all', 'get').mockRejectedValueOnce('index error test');
+                await habitsController.index(null, mockRes);
+            } catch (err) {
+
+            }
+
+            expect(mockStatus).toHaveBeenCalledWith(500);
+            expect(mockJson).toHaveBeenCalledWith(expect.objectContaining({err: 'index error test'}));
+        })
     })
 })
