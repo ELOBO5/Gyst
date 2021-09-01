@@ -1,4 +1,4 @@
-@import url("@import url('https://fonts.googleapis.com/css2?family=Lobster&family=Lobster+Two:ital,wght@0,400;1,700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Lobster&family=Lobster+Two:ital,wght@0,400;1,700&display=swap");
 
 * {
   box-sizing: border-box;
@@ -52,7 +52,7 @@ input {
 }
 
 #username {
-  background-image: url("./assets/username_icon.png");
+  background-image: url("../images/username_icon.png");
   background-size: 25px;
   background-position: 10px 10px;
   background-repeat: no-repeat;
@@ -60,7 +60,7 @@ input {
 }
 
 #email {
-  background-image: url("./assets/email_icon.png");
+  background-image: url("../images/email_icon.png");
   background-size: 25px;
   background-position: 10px 10px;
   background-repeat: no-repeat;
@@ -68,7 +68,7 @@ input {
 }
 
 #password {
-  background-image: url("./assets/password_icon.png");
+  background-image: url("../images/password_icon.png");
   background-size: 25px;
   background-position: 10px 10px;
   background-repeat: no-repeat;

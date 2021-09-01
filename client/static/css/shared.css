@@ -4,12 +4,14 @@ body{
     /* background-color: rgb(205, 253, 219); */
     justify-content: center;
     align-items: center;
+    font-family: Roboto, Arial;
 }
 
 .flex-container{
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-between;
+    align-items: center;
 }
 
 /* headers and footers */
@@ -35,8 +37,14 @@ li a{
     text-align: center;
     text-decoration: none;
 }
+
+nav img{
+  display:block;
+}
+
 .nav li a {
     padding: 30px;
+    font-size: x-large;
   }
 
 .foot li{
@@ -46,6 +54,7 @@ li a{
 footer{
     position: fixed;
     bottom: 0;
+    margin-top: 30px;
 }
   
   /* Change the link color to #111 (black) on hover */
@@ -57,3 +66,13 @@ footer{
 .active {
     background-color: #04AA6D;
   }
+
+#github{
+  display:inline-block;
+  height: 20px;
+}
+
+#gystlogo{
+  height: 90px;
+
+}

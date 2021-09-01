@@ -26,3 +26,89 @@ h3{
     text-decoration: underline;
 }
 
+.indvHabitContainer{
+    list-style-type: none;
+    margin: 0;
+    padding: 5px;
+    color: white;
+    
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-around;
+    align-items: center;
+}
+
+
+.habitListItem{
+    display:inline-block;
+    color: white;
+    text-align: center;
+    cursor: pointer;
+}
+
+.habitListItem > input[type="checkbox"] {
+    cursor: pointer;
+}
+
+
+/* analytics container */
+
+#analyticsListItem{
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    margin: 10px;
+    border: 1px rgb(87, 87, 87) solid;
+    margin: 5px;
+}
+
+.text{
+    color: white;
+    font-size: large;
+    display: inline-block;
+    margin: 15px;
+    width: fit-content;
+}
+
+.title {
+    text-decoration: underline;
+}
+
+.powerblock{
+    display: inline-block;
+    height: 15px;
+    width: 15px;
+    margin: 2px;
+
+}
+
+.block1, .block2 {
+    background-color: red;
+}
+
+
+.block3 {
+    background-color: darkorange;
+}
+
+.block4 {
+    background-color: rgb(247, 233, 37);
+}
+
+.block5, .block6 {
+    background-color: greenyellow;
+}
+
+.block7, .block8 {
+    background-color: rgb(12, 196, 12);
+}
+
+.block9 {
+    background-color: green;
+}
+
+.block10 {
+    background-color: darkgreen;
+}
+
+

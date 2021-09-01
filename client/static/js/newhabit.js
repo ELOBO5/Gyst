@@ -1,15 +1,19 @@
 //Save habit
 
 
-// Create habit on dashboard
+function postNewHabit(e) {
+    e.preventDefault();
+    const habit = document.querySelector('#habit-entry').value;
+    const frequency = document.querySelector('#habit-frequency').value;
+    const has_priority = document.querySelector('#habit-priority').value;
 
-const postHabit = event => {
-    event.preventDefault();
-    const habitEntry = document.querySelector('#habit-entry').value;
     fetch('https://localhost:3000/habits', {
         method: 'POST',
         body: JSON.stringify({
-            message: habitEntry,
+            habit,
+            frequency,
+            has_priority
+            //user_id
         }),
         headers: {
             Accept: 'application/json',
@@ -22,34 +26,5 @@ const postHabit = event => {
 };
 
 
-
-function createPost(data) {
-    const indvHabitContainer = document.createElement('ul');
-    const habit = document.createElement('li');
-    const buttonplaceholder = document.createElement('li')
-    const markAsDone = document.createElement('button')
-    const streakCounter = document.createElement('li')
-
-    indvHabitContainer.setAttribute('class', 'habitContainer');
-    habit.setAttribute('class', 'habitListItem habit');
-    buttonplaceholder.setAttribute('class', 'habitListItem buttonplaceholder')
-    markAsDone.setAttribute('class', 'markAsDoneButton')
-    streakCounter.setAttribute('class', 'habitListItem streakCounter')
-
-    habit.textContent = data.habitEntry;
-    entries.style.outline = 'transparent';
-
-    indvHabitContainer.appendChild(habit);
-    indvHabitContainer.appendChild(buttonplaceholder);
-    buttonplaceholder.appendChild(markAsDone);
-    indvHabitContainer.appendChild(streakCounter);
-
-    //use a switch statement for the different frequencies? 
-    habitListContainer = document.querySelector('#dailyContainer')
-    habitListContainer.appendChild(indvHabitContainer);
-
-}
-
-
-
-//disable priority if > 3
+const submitNewHabit = document.querySelector('#submitNewHabit');
+submitNewHabit.addEventListener('submit', postNewHabit);
