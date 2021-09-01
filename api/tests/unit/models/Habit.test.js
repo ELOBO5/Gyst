@@ -141,7 +141,39 @@ describe('Habit', () => {
             } catch (err) {
                 expect(err).toEqual('Habit could not be updated');
             }
+        })
+    })
+
+    describe('toggleCompleted', () => {
+        test('updates completed and habit_streak on successful db query', async () => {
+            const habitData = {id: 16, habit: 'Exercise a bit', frequency: 'daily', has_priority: false, created_at: '2020-06-30', habit_count: 0, habit_streak: 0, completed: false, user_id: 49};
+            const updates = {completed: true, habit_streak: 1};
+            let updatedHabitData = habitData;
+            updatedHabitData.completed = updates.completed;
+            updatedHabitData.habit_streak = updates.habit_streak;
+            jest.spyOn(db, 'query')
+                .mockResolvedValueOnce({ rows: [updatedHabitData] });
             
+            const habit = new Habit(habitData);
+            const updatedHabit = await habit.toggleCompleted(updates);
+
+            expect(updatedHabit).toBeInstanceOf(Habit);
+            expect(updatedHabit.completed).toEqual(true);
+            expect(updatedHabit.habit_streak).toEqual(1);
+        })
+
+        test('returns error notifying failure of toggle on unsuccessful db query', async () => {
+            const habitData = {id: 16, habit: 'Exercise a bit', frequency: 'daily', has_priority: false, created_at: '2020-06-30', habit_count: 0, habit_streak: 0, completed: false, user_id: 49};
+            const updates = {completed: true, habit_streak: 1};
+
+            const habit = new Habit(habitData);
+
+            try {
+                jest.spyOn(db, 'query').mockRejectedValueOnce(Error());
+                await habit.toggleCompleted(updates);
+            } catch (err) {
+                expect(err).toEqual('Habit completed could not be toggled');
+            }
         })
     })
 })
