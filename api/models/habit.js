@@ -68,8 +68,8 @@ class Habit {
             habitData.user_id,
           ]
         );
-
-        resolve(result.rows[0]);
+        const newHabit = new Habit(result.rows[0]);
+        resolve(newHabit);
       } catch (err) {
         reject("Habit could not be created");
       }
