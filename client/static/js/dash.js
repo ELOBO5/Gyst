@@ -83,13 +83,13 @@ const addAnalyticsToDocument = (habit) => {
   // color coded habit strength indicator
 
   let habitStrengthScale = habitStrengthPercentage / 10;
-  const strengthDisplay = document.querySelector(".strengthDisplay");
+  const strengthDisplayContainer = document.querySelector(".strengthDisplay");
 
   for (let i = 0; i < habitStrengthScale; i++) {
     const strengthBlock = document.createElement("p");
     strengthBlock.setAtrribute("class", `powerblock block${x}`);
 
-    strengthDisplay.appendChild(strengthBlock);
+    strengthDisplayContainer.appendChild(strengthBlock);
   }
   statsContainer.appendChild(analyticsListItem);
 };
