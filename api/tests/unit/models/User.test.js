@@ -37,6 +37,17 @@ describe('User', () => {
             expect(newUser.email).toEqual('new@email.com');
             expect(newUser.password).toEqual('password123');
         })
+
+        test('returns error notifying failure of creation on unsuccessful db query', async () => {
+            const newUserData = {username: 'New User', email: 'new@email.com', password: 'password123'};
+
+            try {
+                jest.spyOn(db, 'query').mockRejectedValueOnce(Error());
+                await User.create(newUserData);
+            } catch (err) {
+                expect(err).toContain('Error creating user:');
+            }
+        })
     })
 
     describe('static findByEmail', () => {
