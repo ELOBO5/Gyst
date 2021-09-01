@@ -47,7 +47,7 @@ class Habit {
           `SELECT * FROM habits WHERE user_id = $1;`,
           [user_id]
         );
-        let habit = new Habit(habitData.rows[0]);
+        let habit = habitData.rows.map((r) => new Habit(r));
         resolve(habit);
       } catch (err) {
         reject("User not found");
@@ -58,14 +58,12 @@ class Habit {
   static create(habitData) {
     return new Promise(async (resolve, reject) => {
       try {
-        let created_at = new Date().toISOString().slice(0, 10);
         let result = await db.query(
-          `INSERT INTO habits (habit, frequency, has_priority, created_at, user_id) VALUES ($1, $2, $3, $4, $5) RETURNING *;`,
+          `INSERT INTO habits (habit, frequency, has_priority, user_id) VALUES ($1, $2, $3, $4) RETURNING *;`,
           [
             habitData.habit,
             habitData.frequency,
             habitData.has_priority,
-            created_at,
             habitData.user_id
           ]
         );
