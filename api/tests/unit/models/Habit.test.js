@@ -60,4 +60,27 @@ describe('Habit', () => {
             }
         })
     })
+
+    describe('static findByUserId', () => {
+        test('returns all habits of a user, given the user_id', async () => {
+            const user_id = 66;
+            jest.spyOn(db, 'query')
+                .mockResolvedValueOnce({ rows: [{}, {}, {}, {}, {}, {}, {}, {}] });
+
+            const userHabits = await Habit.findByUserId(user_id);
+
+            expect(userHabits.length).toEqual(8);
+        })
+
+        test('returns error notifying failure of retrieval on unsuccessful db query', async () => {
+            const user_id = 66;
+
+            try {
+                jest.spyOn(db, 'query').mockRejectedValueOnce(Error());
+                await Habit.findByUserId(user_id);
+            } catch (err) {
+                expect(err).toEqual('User not found');
+            }
+        })
+    })
 })
