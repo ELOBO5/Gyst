@@ -2,6 +2,8 @@ const BASE_URL = 'http://localhost:3000/habits';
 
 let allHabits;
 
+//habit lists
+
 const addHabitToDocument = (habit, frequency) => {
 	const habitMainContainer = document.getElementById(frequency);
 	const individualContainer = document.createElement('ul');
@@ -42,6 +44,67 @@ const addHabitToDocument = (habit, frequency) => {
 	checkbox.addEventListener('click', () => toggleCompleted(toggleHabit));
 	deleteItem.addEventListener('click', () => deleteHabit(habit.id ));
 };
+
+
+// analytics dash
+// need to add a habit.completed_counter to the database
+const addAnalyticsToDocument = (habit) => {
+
+    let habitStrengthPercentage = (habit.completed_counter/habit.habit_counter) * 100;
+
+	const statsContainer = document.getElementById('stats-container');
+
+
+	const analyticsListItem = document.createElement('div');
+	const analyticItemName = document.createElement('p');
+    const strengthDisplay = document.createElement('div');
+    const strengthPercentage = document.createElement('p');
+    const analyticsData = document.createElement('p');
+
+	analyticsListItem.setAttribute('class', 'analyticsListItem');
+	analyticItemName.setAttribute('class', 'text title');
+    strengthDisplay.setAttribute('class', 'strengthDisplay')
+    strengthPercentage.setAttribute('class', 'percentage text')
+    analyticsData.setAttribute('class', 'data text')
+
+    analyticItemName.textContent = habit.habit;
+    strengthPercentage.textContent = habitStrengthPercentage;
+    
+
+	if (habit.habit_counter === 1){
+        analyticsData.textContent = `${habit.habit} - You started this habit yesterday and currently have a streak of ${habit.streak_counter} day`;
+    }
+    else {
+        analyticsData.textContent = `${habit.habit} - You started this habit ${habit.habit_counter} days ago and currently have a streak of ${habit.streak_counter} days`;
+    };
+	
+	
+	analyticsListItem.appendChild(analyticsItemName);
+    analyticsListItem.appendChild(strengthDisplay);
+    analyticsListItem.appendChild(strengthPercentage);
+    analyticsListItem.appendChild(analyticsData));
+	
+
+
+
+    // color coded habit strength indicator
+
+let habitStrengthScale = habitStrengthPercentage/10;
+const strengthDisplay = document.querySelector('.strengthDisplay');
+
+for (let i = 0; i < habitStrengthScale; i ++) {
+    const strengthBlock = document.createElement('p')
+    strengthBlock.setAtrribute('class', `powerblock block${x}`)
+
+    strengthDisplay.appendChild(strengthBlock);
+
+
+}
+statsContainer.appendChild(analyticsListItem);
+}
+
+
+////
 
 const getAllHabits = async () => {
 	try {
