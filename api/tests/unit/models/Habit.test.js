@@ -211,4 +211,27 @@ describe('Habit', () => {
             }
         })
     })
+
+    describe('destroy', () => {
+        test('returns message notifying success of deletion on successful db query', async () => {
+            const delHabit = new Habit({id: 172, habit: 'Sleep more', frequency: 'daily', has_priority: true, created_at: '2020-08-29', habit_count: 3, habit_streak: 0, completed: true, user_id: 51});
+            jest.spyOn(db, 'query')
+                .mockResolvedValueOnce({id: 172});
+
+            const result = await delHabit.destroy();
+
+            expect(result).toEqual('Habit 172 was deleted');
+        })
+
+        test('returns error notifying failure of deletion on unsuccessful db query', async () => {
+            const delHabit = new Habit({id: 172, habit: 'Sleep more', frequency: 'daily', has_priority: true, created_at: '2020-08-29', habit_count: 3, habit_streak: 0, completed: true, user_id: 51});
+            
+            try {
+                jest.spyOn(db, 'query').mockRejectedValueOnce(Error());
+                await delHabit.destroy();
+            } catch (err) {
+                expect(err).toEqual('Habit could not be deleted');
+            }
+        })
+    })
 })
