@@ -5,7 +5,7 @@ CREATE TABLE habits (
     habit VARCHAR(50) NOT NULL,
     frequency VARCHAR (50) NOT NULL,
     has_priority BOOLEAN NOT NULL,
-    habit_count INT DEFAULT 0,
+    habit_count INT DEFAULT 1,
     habit_streak INT DEFAULT 0,
     completed BOOLEAN DEFAULT false,
     completed_counter INT DEFAULT 0,
