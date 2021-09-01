@@ -20,6 +20,15 @@ describe('User', () => {
 
             expect(all.length).toEqual(5);
         })
+
+        test('returns error notifying failure of retrieval on unsuccessful db query', async () => {
+            try {
+                jest.spyOn(db, 'query').mockRejectedValueOnce(Error());
+                await User.all;
+            } catch (err) {
+                expect(err).toContain('Error retrieving users:');
+            }
+        })
     })
 
     describe('static create', () => {
