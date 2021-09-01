@@ -7,8 +7,8 @@ class Habit {
     this.frequency = data.frequency;
     this.has_priority = data.has_priority;
     this.created_at = data.created_at;
-		this.habit_count = data.habit_count || 0;
-		this.habit_streak = data.habit_streak || 0;
+		this.habit_count = data.habit_count;
+		this.habit_streak = data.habit_streak;
     this.completed = data.completed;
     this.user_id = data.user_id;
   }
