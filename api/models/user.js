@@ -20,9 +20,10 @@ class User {
     });
   }
 
-  static create({ username, email, password }) {
+  static create(userData) {
     return new Promise(async (res, rej) => {
       try {
+        const { username, email, password } = userData;
         let result = await db.query(
           `INSERT INTO users (username, email, password) VALUES ($1, $2, $3) RETURNING *;`,
           [username, email, password]
@@ -45,6 +46,17 @@ class User {
         res(user);
       } catch (err) {
         rej(`Error retrieving user: ${err}`);
+      }
+    });
+  }
+
+  destroy() {
+    return new Promise(async (res, rej) => {
+      try {
+        const result = await db.query("DELETE FROM users WHERE id = $1 RETURNING id;", [this.id]);
+        res(`User ${result.id} was deleted`);
+      } catch (err) {
+        rej("User could not be deleted");
       }
     });
   }
