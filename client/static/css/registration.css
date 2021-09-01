@@ -74,3 +74,11 @@ input {
   background-repeat: no-repeat;
   padding-left: 45px;
 }
+
+#confirm-password {
+  background-image: url("../images/password_icon.png");
+  background-size: 25px;
+  background-position: 10px 10px;
+  background-repeat: no-repeat;
+  padding-left: 45px;
+}
