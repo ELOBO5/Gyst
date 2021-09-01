@@ -14,7 +14,7 @@
 
 #stats-container{
     background-color: #333;
-    min-height: 40vh;
+    /* min-height: 40vh; */
     width: 80vw;
     margin-bottom: 30px;
 
@@ -53,7 +53,7 @@ h3{
 
 /* analytics container */
 
-#analyticsListItem{
+.analyticsListItem{
     display: flex;
     flex-flow: row nowrap;
     align-items: center;
@@ -79,7 +79,6 @@ h3{
     height: 15px;
     width: 15px;
     margin: 2px;
-
 }
 
 .block1, .block2 {
