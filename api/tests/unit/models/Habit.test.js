@@ -96,5 +96,16 @@ describe('Habit', () => {
             expect(newHabit).toBeInstanceOf(Habit);
             expect(newHabit).toEqual({id: 12, habit: 'Exercise', frequency: 'weekly', has_priority: false, created_at: '2020-05-05', habit_count: 0, habit_streak: 0, completed: false, user_id: 4});
         })
+
+        test('returns error notifying failure of creation on unsuccessful db query', async () => {
+            const newHabitData = {habit: 'Exercise', frequency: 'weekly', has_priority: false, user_id: 4};
+
+            try {
+                jest.spyOn(db, 'query').mockRejectedValueOnce(Error());
+                await Habit.create(newHabitData);
+            } catch (err) {
+                expect(err).toEqual('Habit could not be created');
+            }
+        })
     })
 })
