@@ -100,7 +100,7 @@ const addHabitToDocument = (habit, frequency) => {
 		toggleCompleted(toggleHabit);
 		// location.reload();
 	});
-	deleteListItem.addEventListener('click', () => {
+	deleteImage.addEventListener('click', () => {
 		console.log('id ', habit.id);
 		deleteHabit(habit.id);
 	});
