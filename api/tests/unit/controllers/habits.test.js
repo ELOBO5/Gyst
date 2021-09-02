@@ -101,7 +101,7 @@ describe('Habits Controller', () => {
         })
     })
 
-    describe('updateInfo contorller', () => {
+    describe('updateInfo controller', () => {
         test('returns updated habit with a 200 status code', async () => {
             const habitData = {id: 159, habit: 'Exercise', frequency: 'weekly', has_priority: false, created_at: '2020-09-25', habit_count: 0, habit_streak: 0, completed: false, user_id: 59};
             const updates = {habit: 'Sleep', frequency: 'daily', has_priority: false};
