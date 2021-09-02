@@ -54,15 +54,15 @@ const addHabitToDocument = (habit, frequency) => {
 
   checkbox.addEventListener("click", () => {
     console.log(toggleHabit.habit_streak);
+    updateCounter(toggleHabit);
     toggleCompleted(toggleHabit);
   });
-  checkbox.addEventListener("change", () => updateCounter(toggleHabit));
   deleteItem.addEventListener("click", () => deleteHabit(habit.id));
 };
 
 const updateCounter = (habit) => {
   const streakCounter = document.querySelector(`.streakCounter${habit.id}`);
-  streakCounter.textContent = habit.habit_streak;
+  streakCounter.textContent = ++habit.habit_streak;
 };
 
 // analytics dash
