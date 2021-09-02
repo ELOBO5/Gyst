@@ -37,10 +37,6 @@ describe('Habit Endpoints', () => {
         expect(res.body.habit).toEqual('1 third habit');
         expect(res.body.frequency).toEqual('monthly');
         expect(res.body.has_priority).toEqual(true);
-
-        // DATE type in sql contains hours, mins and seconds in the string as well
-        expect(res.body.created_at).toContain('2020-12-15');
-
         expect(res.body.habit_count).toEqual(6);
         expect(res.body.habit_streak).toEqual(0);
         expect(res.body.completed).toEqual(false);
@@ -68,11 +64,10 @@ describe('Habit Endpoints', () => {
         expect(res.statusCode).toEqual(201);
 
         expect(res.body).toHaveProperty('id');
-        expect(res.body).toHaveProperty('created_at');
         expect(res.body.habit).toEqual('create test habit');
         expect(res.body.frequency).toEqual('weekly');
         expect(res.body.has_priority).toEqual(false);
-        expect(res.body.habit_count).toEqual(0);
+        expect(res.body.habit_count).toEqual(1);
         expect(res.body.habit_streak).toEqual(0);
         expect(res.body.completed).toEqual(false);
         expect(res.body.user_id).toEqual(44);
