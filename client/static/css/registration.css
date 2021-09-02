@@ -80,6 +80,18 @@ input[type='submit'] {
 	width: 60%;
 }
 
+.back-to-login {
+	font-family: 'Exo 2', sans-serif;
+	font-weight: 500;
+}
+
+a {
+	text-decoration: none;
+	font-weight: 700;
+	color: black;
+  }
+
+
 @media screen and (max-width: 600px) {
 	.illustration {
 		display: none;
