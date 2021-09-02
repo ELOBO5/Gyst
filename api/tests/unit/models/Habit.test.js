@@ -32,7 +32,7 @@ describe('Habit', () => {
 
     describe('static findByHabitId', () => {
         test('returns habit with particular id on successful db query', async () => {
-            const habitData = {id: 35, habit: 'Sleep', frequency: 'monthly', has_priority: true, created_at: '2020-02-24', user_id: 3};
+            const habitData = {id: 35, habit: 'Sleep', frequency: 'monthly', has_priority: true, user_id: 3};
             const id = habitData.id;
             jest.spyOn(db, 'query')
                 .mockResolvedValueOnce({ rows: [habitData] });
@@ -44,12 +44,12 @@ describe('Habit', () => {
             expect(habit.habit).toEqual('Sleep');
             expect(habit.frequency).toEqual('monthly');
             expect(habit.has_priority).toEqual(true);
-            expect(habit.created_at).toEqual('2020-02-24');
+            expect(habit.completed_counter).toEqual(0);
             expect(habit.user_id).toEqual(3);
         })
 
         test('returns error notifying failure of retrieval on unsuccessful db query', async () => {
-            const habitData = {id: 35, habit: 'Sleep', frequency: 'monthly', has_priority: true, created_at: '2020-02-24', user_id: 3};
+            const habitData = {id: 35, habit: 'Sleep', frequency: 'monthly', has_priority: true, user_id: 3};
             const id = habitData.id;
 
             try {
@@ -87,14 +87,14 @@ describe('Habit', () => {
     describe('static create', () => {
         test('creates new habit on successful db query', async () => {
             const newHabitData = {habit: 'Exercise', frequency: 'weekly', has_priority: false, user_id: 4};
-            const newHabitDataWithAllInfo = {...newHabitData, id: 12, created_at: '2020-05-05', habit_count: 0, habit_streak: 0, completed: false};
+            const newHabitDataWithAllInfo = {...newHabitData, id: 12, habit_count: 1, habit_streak: 0, completed: false};
             jest.spyOn(db, 'query')
                 .mockResolvedValueOnce({ rows: [newHabitDataWithAllInfo] });
 
             const newHabit = await Habit.create(newHabitData);
 
             expect(newHabit).toBeInstanceOf(Habit);
-            expect(newHabit).toEqual({id: 12, habit: 'Exercise', frequency: 'weekly', has_priority: false, created_at: '2020-05-05', habit_count: 0, habit_streak: 0, completed: false, user_id: 4});
+            expect(newHabit).toEqual({id: 12, habit: 'Exercise', frequency: 'weekly', has_priority: false, completed_counter: 0, habit_count: 1, habit_streak: 0, completed: false, user_id: 4});
         })
 
         test('returns error notifying failure of creation on unsuccessful db query', async () => {
@@ -111,7 +111,7 @@ describe('Habit', () => {
 
     describe('updateInfo', () => {
         test('updates habit, frequency and has_priority on successful db query', async () => {
-            const habitData = {id: 15, habit: 'Exercise', frequency: 'monthly', has_priority: true, created_at: '2020-05-05', habit_count: 0, habit_streak: 0, completed: false, user_id: 48};
+            const habitData = {id: 15, habit: 'Exercise', frequency: 'monthly', has_priority: true, habit_count: 1, habit_streak: 0, completed: false, user_id: 48};
             const updates = {habit: 'Sleep', frequency: 'daily', has_priority: true};
             let updatedHabitData = habitData;
             updatedHabitData.habit = updates.habit;
@@ -130,7 +130,7 @@ describe('Habit', () => {
         })
 
         test('returns error notifying failure of update on unsuccessful db query', async () => {
-            const habitData = {id: 15, habit: 'Exercise', frequency: 'monthly', has_priority: true, created_at: '2020-05-05', habit_count: 0, habit_streak: 0, completed: false, user_id: 48};
+            const habitData = {id: 15, habit: 'Exercise', frequency: 'monthly', has_priority: true, habit_count: 1, habit_streak: 0, completed: false, user_id: 48};
             const updates = {habit: 'Sleep', frequency: 'daily', has_priority: true};
 
             const habit = new Habit(habitData);
@@ -146,7 +146,7 @@ describe('Habit', () => {
 
     describe('toggleCompleted', () => {
         test('updates completed and habit_streak on successful db query', async () => {
-            const habitData = {id: 16, habit: 'Exercise a bit', frequency: 'daily', has_priority: false, created_at: '2020-06-30', habit_count: 0, habit_streak: 0, completed: false, user_id: 49};
+            const habitData = {id: 16, habit: 'Exercise a bit', frequency: 'daily', has_priority: false, habit_count: 1, habit_streak: 0, completed: false, user_id: 49};
             const updates = {completed: true, habit_streak: 1};
             let updatedHabitData = habitData;
             updatedHabitData.completed = updates.completed;
@@ -163,7 +163,7 @@ describe('Habit', () => {
         })
 
         test('returns error notifying failure of toggle on unsuccessful db query', async () => {
-            const habitData = {id: 16, habit: 'Exercise a bit', frequency: 'daily', has_priority: false, created_at: '2020-06-30', habit_count: 0, habit_streak: 0, completed: false, user_id: 49};
+            const habitData = {id: 16, habit: 'Exercise a bit', frequency: 'daily', has_priority: false, habit_count: 1, habit_streak: 0, completed: false, user_id: 49};
             const updates = {completed: true, habit_streak: 1};
 
             const habit = new Habit(habitData);
@@ -179,7 +179,7 @@ describe('Habit', () => {
 
     describe('dailyReset', () => {
         test('updates habit_streak, habit_count and completed on successful db query', async () => {
-            const habitData = {id: 17, habit: 'Exercise a bit more', frequency: 'weekly', has_priority: true, created_at: '2020-07-28', habit_count: 5, habit_streak: 3, completed: true, user_id: 50};
+            const habitData = {id: 17, habit: 'Exercise a bit more', frequency: 'weekly', has_priority: true, habit_count: 5, habit_streak: 3, completed: true, user_id: 50};
             const updates = {habit_streak: 4};
             let updatedHabitData = habitData;
             updatedHabitData.habit_streak = updates.habit_streak;
@@ -198,7 +198,7 @@ describe('Habit', () => {
         })
 
         test('returns error notifying failure of reset on unsuccessful db query', async () => {
-            const habitData = {id: 17, habit: 'Exercise a bit more', frequency: 'weekly', has_priority: true, created_at: '2020-07-28', habit_count: 5, habit_streak: 3, completed: true, user_id: 50};
+            const habitData = {id: 17, habit: 'Exercise a bit more', frequency: 'weekly', has_priority: true, habit_count: 5, habit_streak: 3, completed: true, user_id: 50};
             const updates = {habit_streak: 4};
 
             const habit = new Habit(habitData);
@@ -214,7 +214,7 @@ describe('Habit', () => {
 
     describe('destroy', () => {
         test('returns message notifying success of deletion on successful db query', async () => {
-            const delHabit = new Habit({id: 172, habit: 'Sleep more', frequency: 'daily', has_priority: true, created_at: '2020-08-29', habit_count: 3, habit_streak: 0, completed: true, user_id: 51});
+            const delHabit = new Habit({id: 172, habit: 'Sleep more', frequency: 'daily', has_priority: true, habit_count: 3, habit_streak: 0, completed: true, user_id: 51});
             jest.spyOn(db, 'query')
                 .mockResolvedValueOnce({id: 172});
 
@@ -224,7 +224,7 @@ describe('Habit', () => {
         })
 
         test('returns error notifying failure of deletion on unsuccessful db query', async () => {
-            const delHabit = new Habit({id: 172, habit: 'Sleep more', frequency: 'daily', has_priority: true, created_at: '2020-08-29', habit_count: 3, habit_streak: 0, completed: true, user_id: 51});
+            const delHabit = new Habit({id: 172, habit: 'Sleep more', frequency: 'daily', has_priority: true, habit_count: 3, habit_streak: 0, completed: true, user_id: 51});
             
             try {
                 jest.spyOn(db, 'query').mockRejectedValueOnce(Error());
