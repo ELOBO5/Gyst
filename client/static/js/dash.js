@@ -160,7 +160,8 @@ const toggleCompleted = async (habit) => {
       headers: { "Content-Type": "application/json", authorization: token },
       body: JSON.stringify(habit)
     };
-
+    const streakCounter = document.querySelector(`streakCounter${habit.id}`);
+    streakCounter.textContent = ++habit.habit_streak;
     await fetch(`${BASE_URL}/${habit.id}/completed`, options);
   } catch (error) {
     console.error("Error updating habit in client");
