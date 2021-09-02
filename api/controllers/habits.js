@@ -35,7 +35,7 @@ async function updateInfo(req, res) {
 		const habit = await Habit.findByHabitId(req.params.id);
 		const updatedHabit = await habit.updateInfo(req.body);
 		res.status(200).json(updatedHabit);
-	} catch (error) {
+	} catch (err) {
         console.error('Could not update habit');
 		res.status(404).json({ err });
 	}
@@ -44,11 +44,11 @@ async function updateInfo(req, res) {
 async function toggleCompleted(req, res) {
     try {
         const habit = await Habit.findByHabitId(req.params.id);
-        const updatedHabit = await habit.toggleCompleted(req.body)
+        const updatedHabit = await habit.toggleCompleted(req.body);
         res.status(200).json(updatedHabit);
-    } catch (error) {
+    } catch (err) {
         console.error('Could not toggle habit completed');
-        res.status(404).json({ error });
+        res.status(404).json({err});
     }
 }
 
@@ -57,9 +57,9 @@ async function dailyReset(req, res) {
         const habit = await Habit.findByHabitId(req.params.id);
         const updatedHabit = await habit.dailyReset(req.body)
         res.status(200).json(updatedHabit);
-    } catch (error) {
+    } catch (err) {
         console.error('Could not reset habit for the day');
-        res.status(404).json({ error });
+        res.status(404).json({err});
     }
 }
 
