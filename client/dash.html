@@ -24,17 +24,36 @@
             <section class='habitlist daily'>
                 <img src="static/images/daily-illustration.svg" alt="daily habit">
                 <h3>Daily</h3>
-                <ul id='daily'></ul>
+                <ul id='daily' class="individual">
+                    <li><img src="static/images/unchecked.png" alt="incomplete"></li>
+                    <li>
+                        <div class="individual-habit">
+                            <p class="individual-habit-name">Read book</p>
+                            <p class="individual-habit-streak">Complete today to have the first streak</p>
+                        </div>
+                    </li>
+                    <li class="delete-btn"><img src="static/images/delete.png" alt="delete"></li>
+                </ul>
+                <ul id='daily' class="individual">
+                    <li class="habit-checkbox"><img src="static/images/checked.png" alt="complete"></li>
+                    <li>
+                        <div class="individual-habit">
+                            <p class="individual-habit-name">Sleep 8 hours</p>
+                            <p class="individual-habit-streak">3-day streak</p>
+                        </div>
+                    </li>
+                    <li><img src="static/images/delete.png" alt="delete"></li>
+                </ul>
             </section>
             <section class='habitlist weekly'>
                 <img src="static/images/weekly-illustration.svg" alt="daily habit">
                 <h3>Weekly</h3>
-                <ul id='weekly'></ul>
+                <ul id='weekly' class="individual"></ul>
             </section>
             <section class='habitlist monthly'>
                 <img src="static/images/monthly-illustration.svg" alt="daily habit">
                 <h3>Monthly</h3>
-                <ul id='monthly'></ul>
+                <ul id='monthly' class="individual"></ul>
             </section>
         </section>
     </main>
