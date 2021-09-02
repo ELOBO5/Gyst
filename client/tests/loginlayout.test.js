@@ -34,7 +34,7 @@
  
      describe('body', () => {
  
-         test('header exists and includes sit name and a welcome', () => {
+         test('header exists and includes site name and a welcome', () => {
              let header = document.querySelector('header');
              expect('header').toBeTruthy();
              const lowerCaseHeader = header.textContent.toLowerCase();
