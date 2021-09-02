@@ -48,5 +48,19 @@ describe('Users Controller', () => {
             expect(mockStatus).toHaveBeenCalledWith(200);
             expect(mockJson).toHaveBeenCalledWith(['habit1', 'habit2', 'habit3'])
         })
+
+        test('returns error with a 500 status code', async () => {
+            const mockReq = { params: {id: 6789} };
+
+            try {
+                jest.spyOn(Habit, 'findByUserId').mockRejectedValueOnce('getHabitsForUser error test');
+                await usersController.getHabitsForUser(mockReq, mockRes);
+            } catch (err) {
+                
+            }
+
+            expect(mockStatus).toHaveBeenCalledWith(500);
+            expect(mockJson).toHaveBeenCalledWith(expect.objectContaining({err: 'getHabitsForUser error test'}))
+        })
     })
 })
