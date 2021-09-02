@@ -16,7 +16,6 @@ let allHabits;
 
 const addHabitToDocument = (habit, frequency) => {
   const habitMainContainer = document.getElementById(frequency);
-  habitMainContainer.innerHTML = "";
   const individualContainer = document.createElement("ul");
   const habitListItem = document.createElement("li");
   const completedListItem = document.createElement("li");
@@ -44,30 +43,30 @@ const addHabitToDocument = (habit, frequency) => {
   individualContainer.appendChild(deleteItem);
   habitMainContainer.appendChild(individualContainer);
 
+  // const streakCounter = document.querySelector(`.streakCounter${habit.id}`);
+  let habitStreak = parseInt(streakListItem.textContent);
+  habit.completed ? --habitStreak : ++habitStreak;
+
   const toggleHabit = {
     id: habit.id,
     completed: !habit.completed,
-    habit_streak: habit.completed ? --habit.habit_streak : ++habit.habit_streak,
+    habit_streak: habitStreak,
     completed_counter: habit.completed
       ? --habit.completed_counter
       : ++habit.completed_counter
   };
 
   checkbox.addEventListener("click", () => {
-    // updateCounter(toggleHabit);
+    updateCounter(habitStreak);
     toggleCompleted(toggleHabit);
-    // getAllHabits();
-    location.reload();
+    // location.reload();
   });
   deleteItem.addEventListener("click", () => deleteHabit(habit.id));
 };
 
-const updateCounter = (habit) => {
+const updateCounter = (habitStreak) => {
   const streakCounter = document.querySelector(`.streakCounter${habit.id}`);
-  let habitStreak = parseInt(streakCounter.textContent);
-  console.log(habitStreak);
-  habit.completed = !habit.completed;
-  streakCounter.textContent = habit.completed ? --habitStreak : ++habitStreak;
+  streakCounter.textContent = habitStreak;
 };
 
 // analytics dash
