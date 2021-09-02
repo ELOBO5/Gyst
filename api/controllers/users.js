@@ -43,8 +43,8 @@ async function create(req, res) {
 
 async function destroy(req, res) {
     try {
-        const User = await User.findByEmail(req.params.id);
-        await User.destroy();
+        const user = await User.findByEmail(req.params.email);
+        await user.destroy();
         res.status(204).end();
     } catch (err) {
         console.error('Could not delete User');
