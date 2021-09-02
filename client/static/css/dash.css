@@ -1,15 +1,70 @@
+@import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@600;700&family=Poppins:wght@400;500&display=swap');
 
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+html {
+	font-size: 62.5%;
+}
+
+body {
+	text-align: center;
+	font-size: 1.6rem;
+	background-color: #f4f4f4;
+}
+
+header {
+    background: #2f4f4f;
+    height: 50vh;
+    width: 100vw;
+    display: flex;
+    justify-content: space-between;
+    padding: 30px 60px;
+    text-transform: uppercase;
+    color: #f4f4f4;
+    font-family: 'Exo 2', sans-serif;
+}
+
+h1 {
+    font-size: 5rem;
+}
+
+header > a {
+    color: #f4f4f4;
+    text-decoration: none;
+    font-size: 1.6rem;
+}
 
 /* habit lists */
 #list-container{
-    margin: 50px;
-    width: 80vw;
-
+    width: 95vw;
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
 }
+
 .habitlist{
+    margin-top: -260px;
     min-height: 50vh;
     width: 25vw;
-    background-color: #333;
+    background-color:rgba(255, 255, 255, 0.4);
+    border-radius: 30px;
+}
+
+.habitlist > img {
+    height: 126px;
+    margin-top: 50px;
+}
+
+.habitlist > h3 {
+    font-family: 'Exo 2', sans-serif;
+    font-weight: 600;
+    font-size: 2.7rem;
+    text-decoration: none;
+    margin-top: 20px;
 }
 
 #stats-container{

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,46 +12,45 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
     <script src="static/js/dash.js" defer></script>
 </head>
-<body>
-    <nav>
-        <ul class='flex-container outer nav'>
-            <ul id='leftnav'>
-                <li><a href='dash.html'>Dash</a></li>
-                <li><a href='newhabit.html'>+</a></li>
-            </ul>
-            
-            <li><img id=gystlogo src='./static/images/GYSTLOGO.PNG' alt='logo'></li>
-            <li><a href='index.html' id="logout">Logout</a></li>
-            
-        </ul>
-        
-    </nav>
 
-    <section class='flex-container' id='list-container'>
-        <section class='habitlist'>
-            <h3>Daily</h3>
-            <ul id='daily'></ul>
+<body>
+    <header>
+        <a href='newhabit.html'>Add new habit</a>
+        <h1>Gyst</h1>
+        <a href='index.html' id="logout">Log out</a>
+    </header>
+    <main>
+        <section class='flex-container' id='list-container'>
+            <section class='habitlist daily'>
+                <img src="static/images/daily-illustration.svg" alt="daily habit">
+                <h3>Daily</h3>
+                <ul id='daily'></ul>
+            </section>
+            <section class='habitlist weekly'>
+                <img src="static/images/weekly-illustration.svg" alt="daily habit">
+                <h3>Weekly</h3>
+                <ul id='weekly'></ul>
+            </section>
+            <section class='habitlist monthly'>
+                <img src="static/images/monthly-illustration.svg" alt="daily habit">
+                <h3>Monthly</h3>
+                <ul id='monthly'></ul>
+            </section>
         </section>
-        <section class='habitlist'>
-            <h3>Weekly</h3>
-            <ul id='weekly'></ul>
-        </section>
-        <section class='habitlist'>
-            <h3>Monthly</h3>
-            <ul id='monthly'></ul>
-        </section>
-    </section>
+    </main>
 
     <section id='stats-container'>
 
     </section>
 
     <footer class='flex-container'>
-        <ul class = 'foot outer'>
-            <li><a href='https://github.com/ELOBO5/Gyst'>GYST aka Get Your Shit Together! Bought to you by Tobi, Tegan, Gorazd and Elicia <img id='github' src='./static/images/github-logo.png'></a></li>
+        <ul class='foot outer'>
+            <li><a href='https://github.com/ELOBO5/Gyst'>GYST aka Get Your Shit Together! Bought to you by Tobi, Tegan,
+                    Gorazd and Elicia <img id='github' src='./static/images/github-logo.png'></a></li>
         </ul>
     </footer>
 
     </section>
 </body>
+
 </html>
