@@ -48,6 +48,7 @@
                     expect(userNameInput).toBeTruthy(); 
                     expect(userNameInput.getAttribute('maxlength')).toBe('30');
                     expect(userNameInput.getAttribute('required')).toBeTruthy();
+                });
 
                 test('it has a required input field for email with a character limit of 100', () => {
                     const emailInput = document.querySelector('#email');
@@ -80,6 +81,3 @@
             });
         });
  });
- 
-
- 
