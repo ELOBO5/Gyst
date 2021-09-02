@@ -33,7 +33,7 @@ const addHabitToDocument = (habit, frequency) => {
 
   habitListItem.textContent = habit.habit;
   checkbox.checked = habit.completed;
-  streakListItem.textContent = "🔥 " + habit.habit_streak;
+  streakListItem.textContent = habit.habit_streak;
   deleteItem.innerHTML = "&#128465;";
 
   completedListItem.appendChild(checkbox);
@@ -62,10 +62,9 @@ const addHabitToDocument = (habit, frequency) => {
 
 const updateCounter = (habit) => {
   const streakCounter = document.querySelector(`.streakCounter${habit.id}`);
+  const habitStreak = parseInt(streakCounter.value);
   habit.completed = !habit.completed;
-  streakCounter.textContent = habit.completed
-    ? --habit.habit_streak
-    : ++habit.habit_streak;
+  streakCounter.textContent = habit.completed ? --habitStreak : ++habitStreak;
 };
 
 // analytics dash
