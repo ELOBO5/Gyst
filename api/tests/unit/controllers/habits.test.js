@@ -144,4 +144,46 @@ describe('Habits Controller', () => {
             expect(mockJson).toHaveBeenCalledWith(expect.objectContaining({err: 'updateInfo error test'}));
         })
     })
+
+    describe('toggleCompleted controller', () => {
+        test('returns updated habit with a 200 status code', async () => {
+            const habitData = {id: 169, habit: 'Exercise a little', frequency: 'daily', has_priority: true, created_at: '2020-08-20', habit_count: 0, habit_streak: 0, completed: false, user_id: 499};
+            const updates = {completed: true, habit_streak: 1};
+            let updatedHabitData = habitData;
+            updatedHabitData.completed = updates.completed;
+            updatedHabitData.habit_streak = updates.habit_streak;
+            jest.spyOn(Habit, 'findByHabitId')
+                .mockResolvedValueOnce(new Habit(habitData));
+            jest.spyOn(Habit.prototype, 'toggleCompleted')
+                .mockResolvedValueOnce(new Habit(updatedHabitData));
+            const mockReq = { body: habitData, params: {id: 169} };
+
+            await habitsController.toggleCompleted(mockReq, mockRes);
+
+            expect(mockStatus).toHaveBeenCalledWith(200);
+            expect(mockJson).toHaveBeenCalledWith(new Habit(updatedHabitData));
+        })
+
+        test('returns error with a 404 status code', async () => {
+            const habitData = {id: 169, habit: 'Exercise a little', frequency: 'daily', has_priority: true, created_at: '2020-08-20', habit_count: 0, habit_streak: 0, completed: false, user_id: 499};
+            const updates = {completed: true, habit_streak: 1};
+            let updatedHabitData = habitData;
+            updatedHabitData.completed = updates.completed;
+            updatedHabitData.habit_streak = updates.habit_streak;
+            const mockReq = { body: habitData, params: {id: 169} };
+
+            try {
+                jest.spyOn(Habit, 'findByHabitId')
+                    .mockResolvedValueOnce(new Habit(habitData));
+                jest.spyOn(Habit.prototype, 'toggleCompleted')
+                    .mockRejectedValueOnce('toggleCompleted error test');
+                await habitsController.toggleCompleted(mockReq, mockRes);
+            } catch (err) {
+                
+            }
+
+            expect(mockStatus).toHaveBeenCalledWith(404);
+            expect(mockJson).toHaveBeenCalledWith(expect.objectContaining({err: 'toggleCompleted error test'}));
+        })
+    })
 })
