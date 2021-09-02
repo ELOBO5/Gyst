@@ -5,7 +5,7 @@ const token = localStorage.getItem("token");
 
 function checkToken() {
   if (!token) {
-    window.location.href = "https://gyst.vercel.app/client/index.html";
+    window.location.href = "https://gyst.vercel.app/index.html";
     return;
   }
 }
@@ -262,7 +262,7 @@ const deleteHabit = async (id) => {
 
 function logout() {
   localStorage.clear();
-  window.location.href = "https://gyst.vercel.app/client/index.html";
+  window.location.href = "https://gyst.vercel.app/index.html";
 }
 
 const logoutButton = document.getElementById("logout");

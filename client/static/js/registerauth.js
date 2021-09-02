@@ -22,7 +22,7 @@ async function requestRegistration(e) {
       throw Error(data.err);
       return;
     }
-    window.location.href = "https://gyst.vercel.app/client/index.html";
+    window.location.href = "https://gyst.vercel.app/index.html";
   } catch (err) {
     console.warn(err);
   }
