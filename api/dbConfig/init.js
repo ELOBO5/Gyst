@@ -8,7 +8,7 @@ const { Pool } = require("pg");
 // });
 
 const pool = (() => {
-  if (process.env.NODE_ENV === 'development' || 'test') {
+  if ((process.env.NODE_ENV === 'development') || (process.env.NODE_ENV === 'test')) {
       return new Pool();
   } else {
       return new Pool({
