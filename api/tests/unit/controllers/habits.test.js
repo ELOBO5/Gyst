@@ -11,7 +11,7 @@ describe('Habits Controller', () => {
 
     afterAll(() => jest.resetAllMocks())
 
-    describe('index', () => {
+    describe('index controller', () => {
         test('returns all habits with a 200 status code', async () => {
             jest.spyOn(Habit, 'all', 'get')
                 .mockResolvedValueOnce(['habit1', 'habit2']);
@@ -35,7 +35,7 @@ describe('Habits Controller', () => {
         })
     })
 
-    describe('show', () => {
+    describe('show controller', () => {
         test('returns a habit with a 200 status code', async () => {
             const testHabitData = {
                 id: 554, habit: 'Sleep', frequency: 'daily', has_priority: true, created_at: '2020-04-22',
