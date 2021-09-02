@@ -62,7 +62,7 @@ const addHabitToDocument = (habit, frequency) => {
 
 const updateCounter = (habit) => {
   const streakCounter = document.querySelector(`.streakCounter${habit.id}`);
-  completed = !habit.completed;
+  habit.completed = !habit.completed;
   streakCounter.textContent = habit.completed
     ? --habit.habit_streak
     : ++habit.habit_streak;
