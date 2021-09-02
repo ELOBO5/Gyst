@@ -35,3 +35,5 @@ function login(token) {
 
 const loginForm = document.querySelector("form#login");
 loginForm.addEventListener("submit", requestLogin);
+
+module.exports = { requestLogin };
