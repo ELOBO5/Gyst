@@ -3,7 +3,8 @@ const Habit = require('../../../models/habit.js');
 
 const mockSend = jest.fn();
 const mockJson = jest.fn();
-const mockStatus = jest.fn(() => ({send: mockSend, json: mockJson}));
+const mockEnd = jest.fn();
+const mockStatus = jest.fn(() => ({send: mockSend, json: mockJson, end: mockEnd}));
 const mockRes = {status: mockStatus};
 
 describe('Habits Controller', () => {
@@ -228,6 +229,21 @@ describe('Habits Controller', () => {
 
             expect(mockStatus).toHaveBeenCalledWith(404);
             expect(mockJson).toHaveBeenCalledWith(expect.objectContaining({err: 'dailyReset error test'}));
+        })
+    })
+
+    describe('destroy controller', () => {
+        test('returns a 204 status code on successful deletion', async () => {
+            const delHabit = new Habit({id: 1726, habit: 'Sleep even more', frequency: 'daily', has_priority: true, created_at: '2020-09-23', habit_count: 8, habit_streak: 3, completed: true, user_id: 516});
+            jest.spyOn(Habit, 'findByHabitId')
+                .mockResolvedValueOnce(new Habit(delHabit));
+            jest.spyOn(Habit.prototype, 'destroy')
+                .mockResolvedValueOnce('Deleted');
+            const mockReq = { params: {id: 1726} };
+
+            await habitsController.destroy(mockReq, mockRes);
+
+            expect(mockStatus).toHaveBeenCalledWith(204);
         })
     })
 })
