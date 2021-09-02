@@ -50,5 +50,19 @@ describe('Habits Controller', () => {
             expect(mockStatus).toHaveBeenCalledWith(200);
             expect(mockJson).toHaveBeenCalledWith(new Habit(testHabitData));
         })
+
+        test('returns error with a 404 status code', async () => {
+            const mockReq = { params: {id: 554} };
+
+            try {
+                jest.spyOn(Habit, 'findByHabitId').mockRejectedValueOnce('show error test');
+                await habitsController.show(mockReq, mockRes);
+            } catch (err) {
+
+            }
+
+            expect(mockStatus).toHaveBeenCalledWith(404);
+            expect(mockJson).toHaveBeenCalledWith(expect.objectContaining({err: 'show error test'}));
+        })
     })
 })
