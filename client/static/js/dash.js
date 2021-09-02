@@ -52,8 +52,16 @@ const addHabitToDocument = (habit, frequency) => {
       : ++habit.completed_counter
   };
 
-  checkbox.addEventListener("click", () => toggleCompleted(toggleHabit));
+  checkbox.addEventListener("click", () => {
+    updateCounter(toggleHabit);
+    toggleCompleted(toggleHabit);
+  });
   deleteItem.addEventListener("click", () => deleteHabit(habit.id));
+};
+
+const updateCounter = (habit) => {
+  const streakCounter = document.querySelector(`streakCounter${habit.id}`);
+  streakCounter.textContent = ++habit.habit_streak;
 };
 
 // analytics dash
@@ -160,8 +168,6 @@ const toggleCompleted = async (habit) => {
       headers: { "Content-Type": "application/json", authorization: token },
       body: JSON.stringify(habit)
     };
-    const streakCounter = document.querySelector(`streakCounter${habit.id}`);
-    streakCounter.textContent = ++habit.habit_streak;
     await fetch(`${BASE_URL}/${habit.id}/completed`, options);
   } catch (error) {
     console.error("Error updating habit in client");
