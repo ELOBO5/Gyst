@@ -30,3 +30,5 @@ async function requestRegistration(e) {
 
 const registrationForm = document.querySelector("form#register");
 registrationForm.addEventListener("submit", requestRegistration);
+
+module.exports = { requestRegistration };
