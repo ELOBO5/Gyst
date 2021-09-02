@@ -186,4 +186,48 @@ describe('Habits Controller', () => {
             expect(mockJson).toHaveBeenCalledWith(expect.objectContaining({err: 'toggleCompleted error test'}));
         })
     })
+
+    describe('dailyReset controller', () => {
+        test('returns updated habit with a 200 status code', async () => {
+            const habitData = {id: 177, habit: 'Exercise a little more', frequency: 'monthly', has_priority: false, created_at: '2020-04-25', habit_count: 6, habit_streak: 4, completed: true, user_id: 507};
+            const updates = {habit_streak: 5};
+            let updatedHabitData = habitData;
+            updatedHabitData.habit_streak = updates.habit_streak;
+            updatedHabitData.completed = false;
+            updatedHabitData.habit_count = ++habitData.habit_count;
+            jest.spyOn(Habit, 'findByHabitId')
+                .mockResolvedValueOnce(new Habit(habitData));
+            jest.spyOn(Habit.prototype, 'dailyReset')
+                .mockResolvedValueOnce(new Habit(updatedHabitData));
+            const mockReq = { body: habitData, params: {id: 177} };
+
+            await habitsController.dailyReset(mockReq, mockRes);
+
+            expect(mockStatus).toHaveBeenCalledWith(200);
+            expect(mockJson).toHaveBeenCalledWith(new Habit(updatedHabitData));
+        })
+
+        test('returns error with a 404 status code', async () => {
+            const habitData = {id: 177, habit: 'Exercise a little more', frequency: 'monthly', has_priority: false, created_at: '2020-04-25', habit_count: 6, habit_streak: 4, completed: true, user_id: 507};
+            const updates = {habit_streak: 5};
+            let updatedHabitData = habitData;
+            updatedHabitData.habit_streak = updates.habit_streak;
+            updatedHabitData.completed = false;
+            updatedHabitData.habit_count = ++habitData.habit_count;
+            const mockReq = { body: habitData, params: {id: 177} };
+
+            try {
+                jest.spyOn(Habit, 'findByHabitId')
+                    .mockResolvedValueOnce(new Habit(habitData));
+                jest.spyOn(Habit.prototype, 'dailyReset')
+                    .mockRejectedValueOnce('dailyReset error test');
+                await habitsController.dailyReset(mockReq, mockRes);
+            } catch (err) {
+                
+            }
+
+            expect(mockStatus).toHaveBeenCalledWith(404);
+            expect(mockJson).toHaveBeenCalledWith(expect.objectContaining({err: 'dailyReset error test'}));
+        })
+    })
 })
