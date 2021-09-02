@@ -100,4 +100,25 @@ describe('Habits Controller', () => {
             expect(mockJson).toHaveBeenCalledWith(expect.objectContaining({err: 'create error test'}));
         })
     })
+
+    describe('updateInfo contorller', () => {
+        test('returns updated habit with a 200 status code', async () => {
+            const habitData = {id: 159, habit: 'Exercise', frequency: 'weekly', has_priority: false, created_at: '2020-09-25', habit_count: 0, habit_streak: 0, completed: false, user_id: 59};
+            const updates = {habit: 'Sleep', frequency: 'daily', has_priority: false};
+            let updatedHabitData = habitData;
+            updatedHabitData.habit = updates.habit;
+            updatedHabitData.frequency = updates.frequency;
+            updatedHabitData.has_priority = updates.has_priority;
+            jest.spyOn(Habit, 'findByHabitId')
+                .mockResolvedValueOnce(new Habit(habitData));
+            jest.spyOn(Habit.prototype, 'updateInfo')
+                .mockResolvedValueOnce(new Habit(updatedHabitData));
+            const mockReq = { body: habitData, params: {id: 159} };
+
+            await habitsController.updateInfo(mockReq, mockRes);
+
+            expect(mockStatus).toHaveBeenCalledWith(200);
+            expect(mockJson).toHaveBeenCalledWith(new Habit(updatedHabitData));
+        })
+    })
 })
