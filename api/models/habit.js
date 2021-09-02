@@ -43,10 +43,10 @@ class Habit {
     return new Promise(async (resolve, reject) => {
       try {
         let habitsData = await db.query(
-          `SELECT * FROM habits WHERE user_id = $1;`,
+          `SELECT * FROM habits ORDER BY ASC id WHERE user_id = $1;`,
           [user_id]
         );
-        let habits = habitsData.rows.map(h => new Habit(h));
+        let habits = habitsData.rows.map((h) => new Habit(h));
         resolve(habits);
       } catch (err) {
         reject("User not found");
@@ -124,7 +124,10 @@ class Habit {
   destroy() {
     return new Promise(async (res, rej) => {
       try {
-        const result = await db.query("DELETE FROM habits WHERE id = $1 RETURNING id;", [this.id]);
+        const result = await db.query(
+          "DELETE FROM habits WHERE id = $1 RETURNING id;",
+          [this.id]
+        );
         res(`Habit ${result.id} was deleted`);
       } catch (err) {
         rej("Habit could not be deleted");

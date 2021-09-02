@@ -40,3 +40,5 @@ function postNewHabit(e) {
 
 const submitNewHabit = document.querySelector("#submitNewHabit");
 submitNewHabit.addEventListener("submit", postNewHabit);
+
+module.exports = { postNewHabit };
