@@ -53,6 +53,7 @@ const addHabitToDocument = (habit, frequency) => {
   };
 
   checkbox.addEventListener("click", () => {
+    console.log(toggleHabit.habit_streak);
     toggleCompleted(toggleHabit);
     updateCounter(toggleHabit);
   });
