@@ -53,8 +53,8 @@ const addHabitToDocument = (habit, frequency) => {
   };
 
   checkbox.addEventListener("click", () => {
-    updateCounter(toggleHabit);
     toggleCompleted(toggleHabit);
+    updateCounter(toggleHabit);
   });
   deleteItem.addEventListener("click", () => deleteHabit(habit.id));
 };
