@@ -1,12 +1,12 @@
 const BASE_URL = "https://get-your-sht-together.herokuapp.com/habits";
 const USER_URL = "https://get-your-sht-together.herokuapp.com/users";
 
-const token = localStorage.getItem('token');
+const token = localStorage.getItem("token");
 
 function checkToken() {
-  if (!token){
-      window.location.href = "http://127.0.0.1:5503/client/index.html";
-      return;
+  if (!token) {
+    window.location.href = "https://gyst.vercel.app/client/index.html";
+    return;
   }
 }
 
@@ -47,7 +47,9 @@ const addHabitToDocument = (habit, frequency) => {
     id: habit.id,
     completed: !habit.completed,
     habit_streak: habit.completed ? --habit.habit_streak : ++habit.habit_streak,
-	  completed_counter: habit.completed ? --habit.completed_counter : ++habit.completed_counter
+    completed_counter: habit.completed
+      ? --habit.completed_counter
+      : ++habit.completed_counter
   };
 
   checkbox.addEventListener("click", () => toggleCompleted(toggleHabit));
@@ -59,9 +61,10 @@ const addHabitToDocument = (habit, frequency) => {
 const addAnalyticsToDocument = (habit) => {
   let habitStrengthPercentage;
   if (habit.completed === 0 || habit.habit_count === 0) {
-      habitStrengthPercentage = 0;
+    habitStrengthPercentage = 0;
   } else {
-      habitStrengthPercentage = (habit.completed_counter / habit.habit_count) * 100;
+    habitStrengthPercentage =
+      (habit.completed_counter / habit.habit_count) * 100;
   }
 
   const statsContainer = document.getElementById("stats-container");
@@ -81,48 +84,46 @@ const addAnalyticsToDocument = (habit) => {
   analyticItemName.textContent = habit.habit;
   strengthPercentage.textContent = `${habitStrengthPercentage}%`;
 
-	if (habit.habit_count === 1){
-        analyticsData.textContent = `You started this habit yesterday and currently have a streak of ${habit.habit_streak} day`;
-    }
-    else {
-        analyticsData.textContent = `You started this habit ${habit.habit_count} days ago and currently have a streak of ${habit.habit_streak} days`;
-    };
-	
-	
-	analyticsListItem.appendChild(analyticItemName);
+  if (habit.habit_count === 1) {
+    analyticsData.textContent = `You started this habit yesterday and currently have a streak of ${habit.habit_streak} day`;
+  } else {
+    analyticsData.textContent = `You started this habit ${habit.habit_count} days ago and currently have a streak of ${habit.habit_streak} days`;
+  }
+
+  analyticsListItem.appendChild(analyticItemName);
   analyticsListItem.appendChild(strengthDisplay);
   analyticsListItem.appendChild(strengthPercentage);
   analyticsListItem.appendChild(analyticsData);
-  
+
   // color coded habit strength indicator
-  
+
   let habitStrengthScale = habitStrengthPercentage / 10;
-  
+
   for (let i = 1; i <= habitStrengthScale; i++) {
     const strengthBlock = document.createElement("p");
-    strengthBlock.classList.add("powerblock",  `block${i}`);
+    strengthBlock.classList.add("powerblock", `block${i}`);
     strengthDisplay.appendChild(strengthBlock);
-    console.log('block ', strengthBlock);
-  };
-  
+    console.log("block ", strengthBlock);
+  }
+
   statsContainer.appendChild(analyticsListItem);
 };
 
 const getAllHabits = async () => {
   checkToken();
 
-  const userId = localStorage.getItem('id')
+  const userId = localStorage.getItem("id");
   const authorization = { headers: { authorization: token } };
 
   try {
     const response = await fetch(`${USER_URL}/${userId}/habits`, authorization);
-    const habits= await response.json();
+    const habits = await response.json();
     allHabits = habits;
 
-    habits.forEach(habit => {
+    habits.forEach((habit) => {
       const frequency = habit.frequency.toLowerCase();
       addHabitToDocument(habit, frequency);
-    })
+    });
   } catch (error) {
     console.error("Error getting all habits from server");
   }
@@ -131,19 +132,19 @@ const getAllHabits = async () => {
 const getAnalytics = async () => {
   checkToken();
 
-  const userId = localStorage.getItem('id')
+  const userId = localStorage.getItem("id");
   const authorization = { headers: { authorization: token } };
 
   try {
     const response = await fetch(`${USER_URL}/${userId}/habits`, authorization);
-    const habits= await response.json();
+    const habits = await response.json();
     allHabits = habits;
 
-    habits.forEach(habit => {
-      if (habit.has_priority){
+    habits.forEach((habit) => {
+      if (habit.has_priority) {
         addAnalyticsToDocument(habit);
       }
-    })
+    });
   } catch (error) {
     console.error("Error getting habit analytics from server");
   }
@@ -261,11 +262,11 @@ const deleteHabit = async (id) => {
 
 function logout() {
   localStorage.clear();
-  window.location.href = "http://127.0.0.1:5503/client/index.html";
+  window.location.href = "https://gyst.vercel.app/client/index.html";
 }
 
-const logoutButton = document.getElementById('logout');
-logoutButton.addEventListener('click', logout);
+const logoutButton = document.getElementById("logout");
+logoutButton.addEventListener("click", logout);
 
 getAllHabits();
 getAnalytics();
