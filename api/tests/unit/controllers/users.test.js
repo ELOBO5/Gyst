@@ -91,4 +91,33 @@ describe('Users Controller', () => {
             expect(mockJson).toHaveBeenCalledWith(expect.objectContaining({err: 'show error test'}));
         })
     })
+
+    describe('create controller', () => {
+        test('returns a new user with a 201 status code', async () => {
+            const newUserData = {id: 5544, username: 'test username', email: 'testusername@email.com', password: 'passw0rds'}
+            jest.spyOn(User, 'create')
+                .mockResolvedValueOnce(new User(newUserData));
+            const mockReq = {body: newUserData};
+
+            await usersController.create(mockReq, mockRes);
+
+            expect(mockStatus).toHaveBeenCalledWith(201);
+            expect(mockJson).toHaveBeenCalledWith(new User(newUserData));
+        })
+
+        test('returns error with a 422 status code', async () => {
+            const newUserData = {id: 5544, username: 'test username', email: 'testusername@email.com', password: 'passw0rds'}
+            const mockReq = {body: newUserData}
+
+            try {
+                jest.spyOn(User, 'create').mockRejectedValueOnce('create error test');
+                await usersController.create(mockReq, mockRes);
+            } catch (err) {
+
+            }
+
+            expect(mockStatus).toHaveBeenCalledWith(422);
+            expect(mockJson).toHaveBeenCalledWith(expect.objectContaining({err: 'create error test'}));
+        })
+    })
 })
