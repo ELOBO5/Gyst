@@ -100,7 +100,10 @@ const addHabitToDocument = (habit, frequency) => {
 		toggleCompleted(toggleHabit);
 		// location.reload();
 	});
-	deleteListItem.addEventListener('click', () => deleteHabit(habit.id));
+	deleteListItem.addEventListener('click', () => {
+		console.log('id ', habit.id);
+		deleteHabit(habit.id);
+	});
 };
 
 const updateCounter = (id, habit_streak) => {
