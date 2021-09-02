@@ -16,6 +16,7 @@ let allHabits;
 
 const addHabitToDocument = (habit, frequency) => {
   const habitMainContainer = document.getElementById(frequency);
+  habitMainContainer.innerHTML = "";
   const individualContainer = document.createElement("ul");
   const habitListItem = document.createElement("li");
   const completedListItem = document.createElement("li");
