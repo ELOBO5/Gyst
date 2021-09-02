@@ -34,4 +34,21 @@ describe('Habits Controller', () => {
             expect(mockJson).toHaveBeenCalledWith(expect.objectContaining({err: 'index error test'}));
         })
     })
+
+    describe('show', () => {
+        test('returns a habit with a 200 status code', async () => {
+            const testHabitData = {
+                id: 554, habit: 'Sleep', frequency: 'daily', has_priority: true, created_at: '2020-04-22',
+                habit_count: 0, habit_streak: 0, completed: false, user_id: 6
+            }
+            jest.spyOn(Habit, 'findByHabitId')
+                .mockResolvedValueOnce(new Habit(testHabitData));
+            const mockReq = { params: {id: 554} };
+
+            await habitsController.show(mockReq, mockRes);
+
+            expect(mockStatus).toHaveBeenCalledWith(200);
+            expect(mockJson).toHaveBeenCalledWith(new Habit(testHabitData));
+        })
+    })
 })
