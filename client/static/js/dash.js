@@ -1,6 +1,5 @@
 const BASE_URL = 'https://get-your-sht-together.herokuapp.com/habits';
 const USER_URL = 'https://get-your-sht-together.herokuapp.com/users';
-const image = '../images/checked.png';
 
 const token = localStorage.getItem('token');
 
@@ -21,7 +20,7 @@ const addHabitToDocument = (habit, frequency) => {
 
 	// First list item - complete
 	const completedListItem = document.createElement('li');
-	const completedImage = document.createElement('img');
+	const completedImage = document.createElement('p');
 
 	// Second list item - habit
 	const habitListItem = document.createElement('li');
@@ -31,13 +30,13 @@ const addHabitToDocument = (habit, frequency) => {
 
 	// Third list item - delete
 	const deleteListItem = document.createElement('li');
-	const deleteImage = document.createElement('img');
+	const deleteImage = document.createElement('p');
 
 	// First list item - attributes
 	individualContainer.classList.add('individual');
-	completedImage.src = habit.completed ? '../images/checked.png' : '../images/unchecked.png';
-	// : './static/images/unchecked.png';
-	completedImage.src = habit.completed ? 'completed' : 'incomplete';
+
+	completedImage.classList.add('completed-img');
+	completedImage.innerHTML = habit.completed ? '&#10003;' : '&#9711;';
 
 	// Second list item - attributes
 	habitInfoContainer.classList.add('individual-habit');
@@ -50,8 +49,8 @@ const addHabitToDocument = (habit, frequency) => {
 			: 'Complete today to have your first streak';
 
 	// Third list item - attributes
-	deleteImage.src = '../images/delete.png';
-	deleteImage.alt = 'delete';
+	deleteImage.classList.add('delete-img');
+	deleteImage.innerHTML = '&#10005;';
 
 	completedListItem.appendChild(completedImage);
 	habitInfoContainer.appendChild(habitName);
@@ -101,7 +100,10 @@ const addHabitToDocument = (habit, frequency) => {
 		toggleCompleted(toggleHabit);
 		// location.reload();
 	});
-	deleteListItem.addEventListener('click', () => deleteHabit(habit.id));
+	deleteImage.addEventListener('click', () => {
+		console.log('id ', habit.id);
+		deleteHabit(habit.id);
+	});
 };
 
 const updateCounter = (id, habit_streak) => {
