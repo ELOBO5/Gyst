@@ -39,10 +39,9 @@ class User {
   static findByEmail(email) {
     return new Promise(async (res, rej) => {
       try {
-        let result = await db.query(
-          `SELECT email FROM users WHERE email = $1;`,
-          [email]
-        );
+        let result = await db.query(`SELECT * FROM users WHERE email = $1;`, [
+          email
+        ]);
         let user = new User(result.rows[0]);
         res(user);
       } catch (err) {

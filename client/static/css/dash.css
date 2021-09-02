@@ -1,20 +1,124 @@
+@import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@400;500;600;700&family=Poppins:wght@400;500&display=swap');
 
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+html {
+	font-size: 62.5%;
+}
+
+body {
+	text-align: center;
+	font-size: 1.6rem;
+	background-color: #f4f4f4;
+}
+
+header {
+    background: #2f4f4f;
+    height: 50vh;
+    width: 100vw;
+    display: flex;
+    justify-content: space-between;
+    padding: 30px 60px;
+    text-transform: uppercase;
+    color: #f4f4f4;
+    font-family: 'Exo 2', sans-serif;
+}
+
+h1 {
+    font-size: 5rem;
+}
+
+header > a {
+    color: #f4f4f4;
+    text-decoration: none;
+    font-size: 1.6rem;
+}
+
+li > div {
+    width: 250px;
+}
 
 /* habit lists */
 #list-container{
-    margin: 50px;
-    width: 80vw;
-
+    width: 95vw;
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
 }
+
 .habitlist{
+    margin-top: -260px;
     min-height: 50vh;
     width: 25vw;
-    background-color: #333;
+    background-color:rgba(255, 255, 255, 0.4);
+    border-radius: 30px;
+}
+
+.habitlist > img {
+    height: 126px;
+    margin-top: 50px;
+}
+
+.habitlist > h3 {
+    font-family: 'Exo 2', sans-serif;
+    font-weight: 600;
+    font-size: 2.7rem;
+    text-decoration: none;
+    margin-top: 20px;
+    margin-bottom: 50px;
+}
+
+/* Individual habit */
+
+.individual {
+    margin-top: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    font-family: 'Exo 2', sans-serif;
+    text-align: left;
+    width: 100%;
+}
+
+.individual img {
+    width: 20px;
+}
+
+.habit-checkbox {
+    cursor: pointer;
+}
+
+.delete-btn {
+    visibility: hidden;
+    cursor: pointer;
+}
+
+.delete-btn:hover {
+    cursor: pointer;
+    visibility: visible;
+}
+
+.individual-habit-name {
+    font-weight: 700;
+    font-size: 1.5rem;
+    text-transform: capitalize;
+    margin-bottom: 5px;
+}
+
+.individual-habit-streak {
+    font-weight: 400;
+    font-size: 1.3rem;
+    color: #848484;
+
 }
 
 #stats-container{
     background-color: #333;
-    min-height: 20vh;
+    /* min-height: 40vh; */
     width: 80vw;
     margin-bottom: 30px;
 
@@ -53,7 +157,7 @@ h3{
 
 /* analytics container */
 
-#analyticsListItem{
+.analyticsListItem{
     display: flex;
     flex-flow: row nowrap;
     align-items: center;
@@ -79,7 +183,6 @@ h3{
     height: 15px;
     width: 15px;
     margin: 2px;
-
 }
 
 .block1, .block2 {

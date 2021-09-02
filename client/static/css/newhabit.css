@@ -12,8 +12,11 @@ form{
     align-items: center;
 }
 
-
 label{
     font-size: x-large;
     color: white;
+}
+
+#habit-entry {
+    text-transform: capitalize;
 }

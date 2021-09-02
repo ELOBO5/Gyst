@@ -1,48 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script
-      defer
-      src="https://cdn.jsdelivr.net/npm/jwt-decode@1.5.1/build/jwt-decode.min.js"
-    ></script>
-    <script defer src="static/js/auth.js"></script>
-    <link rel="stylesheet" href="static/css/index.css" />
 
-    <title>Login</title>
-  </head>
-  <body>
-    <header>Habit Tracker</header>
-    <main>
-      <form id="login">
-        <input
-          id="email"
-          type="text"
-          placeholder="Email"
-          required
-          name="email"
-          maxlength="100"
-        />
-        <input
-          id="password"
-          type="password"
-          placeholder="Password"
-          required
-          name="password"
-          maxlength="100"
-        />
-        <input type="submit" value="Login" />
-      </form>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script defer src="https://cdn.jsdelivr.net/npm/jwt-decode@1.5.1/build/jwt-decode.min.js"></script>
+  <script defer src="static/js/loginauth.js"></script>
+  <link rel="stylesheet" href="static/css/index.css" />
 
-      <div>
-        <p>
-          <a href="registration.html">
-            Don't have an account? Click here to register!</a
-          >
-        </p>
-      </div>
-    </main>
-  </body>
+  <title>Login</title>
+</head>
+
+<body>
+  <!-- <header>Habit Tracker</header> -->
+  <main>
+    <div class="illustration">
+      <img src="./static/images/login-illustration.svg" alt="register" class="illustration-img">
+    </div>
+    <form id="login">
+      <h1>Welcome to Gyst</h1>
+      <input id="email" type="text" placeholder="Email" required name="email" maxlength="100" />
+      <input id="password" type="password" placeholder="Password" required name="password" maxlength="100" />
+      <input type="submit" value="Login" />
+      <p class="register-check">Don't have an account? <a href="registration.html">Click here to register!</a></p>
+    </form>
+
+    <!-- <div>
+      <p>
+        <a href="registration.html">
+          Don't have an account? Click here to register!</a>
+      </p>
+    </div> -->
+  </main>
+</body>
+
 </html>
