@@ -41,6 +41,10 @@ header > a {
 	font-weight: 700;
 }
 
+li {
+	list-style: none;
+}
+
 li > div {
 	width: 250px;
 }
