@@ -81,5 +81,23 @@ describe('Habits Controller', () => {
             expect(mockStatus).toHaveBeenCalledWith(201);
             expect(mockJson).toHaveBeenCalledWith(new Habit(newHabitData));
         })
+
+        test('returns error with a 422 status code', async () => {
+            const newHabitData = {
+                id: 555, habit: 'Exercise', frequency: 'weekly', has_priority: true, created_at: '2020-03-12',
+                habit_count: 0, habit_streak: 0, completed: false, user_id: 8
+            }
+            const mockReq = {body: newHabitData}
+
+            try {
+                jest.spyOn(Habit, 'create').mockRejectedValueOnce('create error test');
+                await habitsController.create(mockReq, mockRes);
+            } catch (err) {
+
+            }
+
+            expect(mockStatus).toHaveBeenCalledWith(422);
+            expect(mockJson).toHaveBeenCalledWith(expect.objectContaining({err: 'create error test'}));
+        })
     })
 })
