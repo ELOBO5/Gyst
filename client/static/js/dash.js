@@ -64,7 +64,7 @@ const updateCounter = (habit) => {
   let habitStreak = parseInt(streakCounter.textContent);
   console.log(habitStreak);
   habit.completed = !habit.completed;
-  streakCounter.textContent = habit.completed ? --habitStreak : ++habitStreak;
+  streakCounter.textContent = habit.completed ? ++habitStreak : --habitStreak;
 };
 
 // analytics dash
