@@ -61,7 +61,7 @@ const addHabitToDocument = (habit, frequency) => {
 
 const updateCounter = (habit) => {
   const streakCounter = document.querySelector(`streakCounter${habit.id}`);
-  streakCounter.textContent = ++habit.habit_streak;
+  streakCounter.innerHTML = habit.habit_streak;
 };
 
 // analytics dash
