@@ -120,4 +120,37 @@ describe('Users Controller', () => {
             expect(mockJson).toHaveBeenCalledWith(expect.objectContaining({err: 'create error test'}));
         })
     })
+
+    describe('destroy controller', () => {
+        test('returns a 204 status code on successful deletion', async () => {
+            const delUser = new User({id: 8734, username: 'for deletion', email: 'willdissappear@email.com', password: 'goinggoinggone'});
+            jest.spyOn(User, 'findByEmail')
+                .mockResolvedValueOnce(new User(delUser));
+            jest.spyOn(User.prototype, 'destroy')
+                .mockResolvedValueOnce('Deleted');
+            const mockReq = { params: {email: 'willdissappear@email.com'} };
+
+            await usersController.destroy(mockReq, mockRes);
+
+            expect(mockStatus).toHaveBeenCalledWith(204);
+        })
+
+        test('returns error with a 404 status code', async () => {
+            const delUser = new User({id: 8734, username: 'for deletion', email: 'willdissappear@email.com', password: 'goinggoinggone'});
+            const mockReq = { params: {email: 'willdissappear@email.com'} };
+
+            try {
+                jest.spyOn(User, 'findByEmail')
+                .mockResolvedValueOnce(new User(delUser));
+            jest.spyOn(User.prototype, 'destroy')
+                .mockRejectedValueOnce('destroy error test');
+                await usersController.destroy(mockReq, mockRes);
+            } catch (err) {
+                
+            }
+
+            expect(mockStatus).toHaveBeenCalledWith(404);
+            expect(mockJson).toHaveBeenCalledWith(expect.objectContaining({err: 'destroy error test'}))
+        })
+    })
 })
