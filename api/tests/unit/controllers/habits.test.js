@@ -120,5 +120,28 @@ describe('Habits Controller', () => {
             expect(mockStatus).toHaveBeenCalledWith(200);
             expect(mockJson).toHaveBeenCalledWith(new Habit(updatedHabitData));
         })
+
+        test('returns error with a 404 status code', async () => {
+            const habitData = {id: 159, habit: 'Exercise', frequency: 'weekly', has_priority: false, created_at: '2020-09-25', habit_count: 0, habit_streak: 0, completed: false, user_id: 59};
+            const updates = {habit: 'Sleep', frequency: 'daily', has_priority: false};
+            let updatedHabitData = habitData;
+            updatedHabitData.habit = updates.habit;
+            updatedHabitData.frequency = updates.frequency;
+            updatedHabitData.has_priority = updates.has_priority;
+            const mockReq = { body: habitData, params: {id: 159} };
+
+            try {
+                jest.spyOn(Habit, 'findByHabitId')
+                    .mockResolvedValueOnce(new Habit(habitData));
+                jest.spyOn(Habit.prototype, 'updateInfo')
+                    .mockRejectedValueOnce('updateInfo error test');
+                await habitsController.updateInfo(mockReq, mockRes);
+            } catch (err) {
+                
+            }
+
+            expect(mockStatus).toHaveBeenCalledWith(404);
+            expect(mockJson).toHaveBeenCalledWith(expect.objectContaining({err: 'updateInfo error test'}));
+        })
     })
 })
