@@ -53,7 +53,6 @@ const addHabitToDocument = (habit, frequency) => {
   };
 
   checkbox.addEventListener("click", () => {
-    console.log(toggleHabit.habit_streak);
     updateCounter(toggleHabit);
     toggleCompleted(toggleHabit);
   });
@@ -62,7 +61,8 @@ const addHabitToDocument = (habit, frequency) => {
 
 const updateCounter = (habit) => {
   const streakCounter = document.querySelector(`.streakCounter${habit.id}`);
-  let habitStreak = parseInt(streakCounter.value);
+  let habitStreak = parseInt(streakCounter.textContent);
+  console.log(habitStreak);
   habit.completed = !habit.completed;
   streakCounter.textContent = habit.completed ? --habitStreak : ++habitStreak;
 };
