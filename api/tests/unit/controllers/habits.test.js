@@ -245,5 +245,23 @@ describe('Habits Controller', () => {
 
             expect(mockStatus).toHaveBeenCalledWith(204);
         })
+
+        test('returns error with a 404 status code', async () => {
+            const delHabit = new Habit({id: 1726, habit: 'Sleep even more', frequency: 'daily', has_priority: true, created_at: '2020-09-23', habit_count: 8, habit_streak: 3, completed: true, user_id: 516});
+            const mockReq = { params: {id: 1726} };
+
+            try {
+                jest.spyOn(Habit, 'findByHabitId')
+                .mockResolvedValueOnce(new Habit(delHabit));
+            jest.spyOn(Habit.prototype, 'destroy')
+                .mockRejectedValueOnce('destroy error test');
+                await habitsController.destroy(mockReq, mockRes);
+            } catch (err) {
+                
+            }
+
+            expect(mockStatus).toHaveBeenCalledWith(404);
+            expect(mockJson).toHaveBeenCalledWith(expect.objectContaining({err: 'destroy error test'}))
+        })
     })
 })
