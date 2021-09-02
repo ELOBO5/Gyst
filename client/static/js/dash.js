@@ -35,7 +35,7 @@ const addHabitToDocument = (habit, frequency) => {
 
 	// First list item - attributes
 	individualContainer.classList.add('individual');
-	completedImage.src = image;
+	completedImage.src = habit.completed ? '../images/checked.png' : '../images/unchecked.png';
 	// : './static/images/unchecked.png';
 	completedImage.src = habit.completed ? 'completed' : 'incomplete';
 
@@ -109,6 +109,22 @@ const updateCounter = (id, habit_streak) => {
 	streakCounter.textContent = habit_streak;
 };
 
+// const checkHabitLists = () => {
+// 	const lists = document.querySelectorAll('.habitlist');
+// 	console.log('lists ', lists);
+
+// 	for (const list of lists) {
+// 		console.log(list.lastElementChild);
+// 		if (list.lastElementChild === 'h3') {
+// 			const text = document.createElement('p');
+// 			text.textContent = 'There are no habits';
+// 			list.appendChild(text);
+// 		}
+// 	}
+// };
+
+// checkHabitLists();
+
 // analytics dash
 // need to add a habit.completed_counter to the database
 const addAnalyticsToDocument = habit => {
@@ -133,23 +149,16 @@ const addAnalyticsToDocument = habit => {
 	strengthDisplay.setAttribute('class', 'strengthDisplay');
 	// strengthPercentage.classList.add("percentage", "text");
 
-	analyticItemName.textContent = habit.habit;
+	analyticItemName.textContent = habit.habit + ' - ';
 	// strengthPercentage.textContent = `${habitStrengthPercentage}%`;
 
 	if (habit.habit_count === 1 && habit.habit.completed) {
-		analyticsData.textContent = `you started today and are currently on a ${habit.habit_streak}-day streak with a ${habitStrengthPercentage}% percentage rate`;
+		analyticsData.textContent = `you started today and are currently on a ${habit.habit_streak}-day streak with a ${habitStrengthPercentage}% percentage rate.`;
 	} else if (habit.habit_count === 1 && !habit.habit.completed) {
-		analyticsData.textContent = `you started today, so you haven't got a streak yet`;
+		analyticsData.textContent = `you started today, so you haven't got a streak yet.`;
 	} else {
-		analyticsData.textContent = `you started ${habit.habit_count} days ago and are currently on a ${habit.habit_streak}-day streak with a ${habitStrengthPercentage}% percentage rate`;
+		analyticsData.textContent = `you started ${habit.habit_count} days ago and are currently on a ${habit.habit_streak}-day streak with a ${habitStrengthPercentage}% percentage rate.`;
 	}
-
-	analyticsListItem.appendChild(analyticItemName);
-	analyticsListItem.appendChild(strengthDisplay);
-	analyticsListItem.appendChild(strengthPercentage);
-	analyticsListItem.appendChild(analyticsData);
-
-	// color coded habit strength indicator
 
 	let habitStrengthScale = habitStrengthPercentage / 10;
 
@@ -158,6 +167,13 @@ const addAnalyticsToDocument = habit => {
 		strengthBlock.classList.add('powerblock', `block${i}`);
 		strengthDisplay.appendChild(strengthBlock);
 	}
+
+	analyticsListItem.appendChild(analyticItemName);
+	analyticsListItem.appendChild(analyticsData);
+	analyticsListItem.appendChild(strengthDisplay);
+	// analyticsListItem.appendChild(strengthPercentage);
+
+	// color coded habit strength indicator
 
 	statsContainer.appendChild(analyticsListItem);
 };
