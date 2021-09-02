@@ -56,7 +56,8 @@ const addHabitToDocument = (habit, frequency) => {
   checkbox.addEventListener("click", () => {
     // updateCounter(toggleHabit);
     toggleCompleted(toggleHabit);
-    getAllHabits();
+    // getAllHabits();
+    location.reload();
   });
   deleteItem.addEventListener("click", () => deleteHabit(habit.id));
 };
