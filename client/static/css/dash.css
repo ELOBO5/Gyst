@@ -176,35 +176,43 @@ i {
 /* analytics container */
 
 #stats-container {
-	margin-top: 60px;
-	width: 95vw;
+	width: 85vw;
 	text-align: left;
 	font-family: "Poppins", sans-serif;
+	display: flex;
+	justify-content: space-around;
+	flex-wrap: wrap;
 }
 
-#stats-container > h2 {
+.stats-title{
+	margin-top: 60px;
 	font-family: "Exo 2", sans-serif;
 	text-transform: uppercase;
-}
-
-#stats-container > h2 {
+	margin-bottom: 50px;
 	text-align: center;
 }
 
 .analyticsListItem {
+	background-color: #fff;
 	display: flex;
+	flex-direction: column;
 	align-items: center;
-	width: 100%;
 	margin-top: 30px;
-	margin-left: 70px;
+	padding: 20px;
+	width: 360px;
+	border-radius: 20px;
 }
 
-.text {
-	display: inline-block;
+.analyticsListItem > h3 {
+	font-size: 16px;
+	text-transform: capitalize;
 }
 
 .data {
-	margin-left: 3px;
+	font-size: 14px;
+	margin: 15px 0;
+	text-align: center;
+	line-height: 1.8;
 }
 
 .title {
