@@ -1,0 +1,107 @@
+@import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@600;700&family=Poppins:wght@400;500&display=swap');
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+html {
+	font-size: 62.5%;
+}
+
+body {
+	text-align: center;
+	font-size: 1.6rem;
+	background-color: #f4f4f4;
+}
+
+main {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+form {
+	display: flex;
+	flex-direction: column;
+	padding: 50px;
+	margin: 20px auto;
+	width: 40%;
+}
+
+h1 {
+	text-transform: uppercase;
+	font-size: 4rem;
+	font-family: 'Exo 2', sans-serif;
+	margin-bottom: 40px;
+}
+
+input:not(:last-child) {
+	font-family: 'Poppins', sans-serif;
+	font-weight: 500;
+	font-size: 1.5rem;
+	background-color: #edecec;
+	outline: transparent;
+	border: none;
+	border-radius: 10px;
+	padding: 15px;
+	margin-bottom: 30px;
+	height: 55px;
+}
+
+input[type='submit'] {
+	border: none;
+	border-radius: 10px;
+	cursor: pointer;
+	text-transform: uppercase;
+	color: white;
+	background: #2f4f4f;
+	height: 50px;
+	width: 18rem;
+	font-family: 'Exo 2', sans-serif;
+	font-size: 1.6rem;
+	font-weight: 600;
+	outline: transparent;
+	align-self: center;
+	margin-top: 10px;
+}
+
+.illustration {
+	background-color: #2f4f4f;
+	height: 100vh;
+	width: 50vw;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.illustration-img {
+	width: 60%;
+}
+
+.back-to-login {
+	font-family: 'Exo 2', sans-serif;
+	font-weight: 500;
+}
+
+a {
+	text-decoration: none;
+	font-weight: 700;
+	color: black;
+  }
+
+
+@media screen and (max-width: 600px) {
+	.illustration {
+		display: none;
+	}
+
+	form {
+		align-items: center;
+	}
+
+	input {
+		width: 60vw;
+	}
+}

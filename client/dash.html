@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel='stylesheet' href="static/css/shared.css">
+    <link rel='stylesheet' href="static/css/dash.css">
+    <link rel="icon" href="static/images/Gfavicon.PNG">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+        integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="static/js/dash.js" defer></script>
+</head>
+
+<body>
+    <header>
+        <a id='newhabitwords' href='newhabit.html'>Add new habit</a>
+        <a id='newhabitsign' href='newhabit.html'> + </a>
+
+        <h1>Gyst</h1>
+        <a href='index.html' id="logout">Log out</a>
+    </header>
+    <main>
+        <section class='flex-container' id='list-container'>
+            <section class='habitlist daily'>
+                <img src="static/images/daily-illustration.svg" alt="daily habit">
+                <h3>Daily</h3>
+            </section>
+            <section class='habitlist weekly'>
+                <img src="static/images/weekly-illustration.svg" alt="daily habit">
+                <h3>Weekly</h3>
+            </section>
+            <section class='habitlist monthly'>
+                <img src="static/images/monthly-illustration.svg" alt="daily habit">
+                <h3>Monthly</h3>
+            </section>
+        </section>
+    </main>
+
+    <h2 class="stats-title">Spotlight</h2>
+    <section id='stats-container'>
+    </section>
+
+    <footer class='flex-container'>
+        <a href='https://github.com/ELOBO5/Gyst'><img id='github' src='./static/images/github.png'></a></li>
+        <p>Brought to you by Tobi, Tegan, Gorazd and Elicia</p>
+    </footer>
+
+    </section>
+</body>
+
+</html>
