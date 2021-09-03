@@ -1,5 +1,5 @@
-const BASE_URL = "https://gyst-app.herokuapp.com/habits";
-const USER_URL = "https://gyst-app.herokuapp.com/users";
+const BASE_URL = "https://get-your-sht-together.herokuapp.com/habits";
+const USER_URL = "https://get-your-sht-together.herokuapp.com/users";
 
 const token = localStorage.getItem("token");
 
