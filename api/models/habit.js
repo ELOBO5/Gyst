@@ -43,7 +43,7 @@ class Habit {
     return new Promise(async (resolve, reject) => {
       try {
         let habitsData = await db.query(
-          `SELECT * FROM habits ORDER BY ASC id WHERE user_id = $1;`,
+          `SELECT * FROM habits WHERE user_id = $1 ORDER BY id ASC;`,
           [user_id]
         );
         let habits = habitsData.rows.map((h) => new Habit(h));
