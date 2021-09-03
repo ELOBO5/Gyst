@@ -82,23 +82,22 @@ const addAnalyticsToDocument = habit => {
 	const statsContainer = document.getElementById("stats-container");
 
 	const analyticsListItem = document.createElement("div");
-	const analyticItemName = document.createElement("p");
+	const analyticItemName = document.createElement("h3");
 	const analyticsData = document.createElement("p");
 	const strengthDisplay = document.createElement("div");
 
 	analyticsListItem.setAttribute("class", "analyticsListItem");
-	analyticItemName.classList.add("text", "title");
 	analyticsData.classList.add("data", "text");
 	strengthDisplay.setAttribute("class", "strengthDisplay");
 
-	analyticItemName.textContent = habit.habit + " - ";
+	analyticItemName.textContent = habit.habit;
 
 	if (habit.habit_count === 1 && habit.habit.completed) {
-		analyticsData.textContent = `you started today and are currently on a ${habit.habit_streak}-day streak with a ${habitStrengthPercentage}% percentage rate.`;
+		analyticsData.textContent = `You started today and are currently on a ${habit.habit_streak}-day streak with a ${habitStrengthPercentage}% completion rate.`;
 	} else if (habit.habit_count === 1 && !habit.habit.completed) {
-		analyticsData.textContent = `you started today, so you haven't got a streak yet.`;
+		analyticsData.textContent = `You started today, so you haven't got a streak yet.`;
 	} else {
-		analyticsData.textContent = `you started ${habit.habit_count} days ago and are currently on a ${habit.habit_streak}-day streak with a ${habitStrengthPercentage}% percentage rate.`;
+		analyticsData.textContent = `You started ${habit.habit_count} days ago and are currently on a ${habit.habit_streak}-day streak with a ${habitStrengthPercentage}% completion rate.`;
 	}
 
 	let habitStrengthScale = habitStrengthPercentage / 10;
