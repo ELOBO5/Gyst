@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Exo+2:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap");
 
 * {
 	margin: 0;
@@ -25,7 +25,7 @@ header {
 	padding: 30px 60px;
 	text-transform: uppercase;
 	color: #f4f4f4;
-	font-family: 'Exo 2', sans-serif;
+	font-family: "Exo 2", sans-serif;
 }
 
 h1 {
@@ -46,12 +46,21 @@ li {
 }
 
 li > div {
-	width: 250px;
+	width: 270px;
+	margin-left: 5px;
+}
+
+i {
+	color: #2f4f4f;
+	font-size: 22px;
+	margin-left: 10px;
+	cursor: pointer;
 }
 
 /* habit lists */
 #list-container {
 	width: 95vw;
+	max-width: 1500px;
 	display: flex;
 	justify-content: space-around;
 	align-items: flex-start;
@@ -60,8 +69,9 @@ li > div {
 
 .habitlist {
 	margin-top: -260px;
-	min-height: 70vh;
-	width: 25vw;
+	min-height: 580px;
+	width: 27vw;
+	max-width: 400px;
 	background-color: rgba(255, 255, 255, 0.4);
 	border-radius: 30px;
 }
@@ -72,7 +82,7 @@ li > div {
 }
 
 .habitlist > h3 {
-	font-family: 'Exo 2', sans-serif;
+	font-family: "Exo 2", sans-serif;
 	font-weight: 600;
 	font-size: 2.7rem;
 	color: white;
@@ -89,7 +99,7 @@ li > div {
 	display: flex;
 	align-items: center;
 	justify-content: space-around;
-	font-family: 'Exo 2', sans-serif;
+	font-family: "Poppins", sans-serif;
 	text-align: left;
 	width: 100%;
 }
@@ -117,11 +127,11 @@ li > div {
 	font-weight: 700;
 	font-size: 1.6rem;
 	text-transform: capitalize;
-	margin-bottom: 8px;
+	margin-bottom: 3px;
 }
 
 .individual-habit-streak {
-	font-weight: 400;
+	font-weight: 500;
 	font-size: 1.4rem;
 	color: #848484;
 }
@@ -133,21 +143,14 @@ li > div {
 	cursor: pointer;
 }
 
-.habitListItem > input[type='checkbox'] {
-	cursor: pointer;
-}
-
-.completed-img {
-	color: #2f4f4f;
-	padding: 0 10px;
-	font-size: 20px;
+.habitListItem > input[type="checkbox"] {
 	cursor: pointer;
 }
 
 .delete-img {
 	color: #2f4f4f;
 	padding-right: 20px;
-	font-size: 20px;
+	font-size: 22px;
 	opacity: 0.3;
 	transition: all 0.2s ease-in-out;
 	cursor: pointer;
@@ -157,17 +160,29 @@ li > div {
 	opacity: 1;
 }
 
+.add-habits {
+	font-family: "Poppins", sans-serif;
+	font-weight: 500;
+	color: #848484;
+	text-decoration: none;
+	transition: color 0.2s ease-in-out;
+}
+
+.add-habits:hover {
+	color: #333;
+}
+
 /* analytics container */
 
 #stats-container {
 	margin-top: 60px;
 	width: 95vw;
 	text-align: left;
-	font-family: 'Poppins', sans-serif;
+	font-family: "Poppins", sans-serif;
 }
 
 #stats-container > h2 {
-	font-family: 'Exo 2', sans-serif;
+	font-family: "Exo 2", sans-serif;
 	text-transform: uppercase;
 }
 
@@ -180,7 +195,7 @@ li > div {
 	align-items: center;
 	width: 100%;
 	margin-top: 30px;
-	margin-left: 40px;
+	margin-left: 70px;
 }
 
 .text {
@@ -193,6 +208,7 @@ li > div {
 
 .title {
 	font-weight: 600;
+	text-transform: capitalize;
 }
 
 .strengthDisplay {
@@ -241,7 +257,7 @@ li > div {
 footer.flex-container {
 	display: flex;
 	flex-direction: column;
-	font-family: 'Exo 2', sans-serif;
+	font-family: "Exo 2", sans-serif;
 	margin-bottom: 20px;
 }
 

@@ -76,7 +76,7 @@ describe("registration.html", () => {
         expect(returnToLoginText.textContent).toContain(
           "Already have an account?"
         );
-        expect(returnToLoginLink.textContent).toContain("Click here to login!");
+        expect(returnToLoginLink.textContent).toContain("Click here to login");
       });
     });
   });

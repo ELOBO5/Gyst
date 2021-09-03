@@ -74,7 +74,7 @@ describe("index.html", () => {
           "Don't have an account?"
         );
         expect(registrationLink.textContent).toContain(
-          "Click here to register!"
+          "Click here to register"
         );
       });
     });
