@@ -43,3 +43,8 @@ Run `bash _scripts/teardown.sh`
 - Users can delete a habit they are currently tracking
 - Deployed client-side on Vercel: https://gyst.vercel.app/
 - Deployed api and database on Heroku: https://get-your-sht-together.herokuapp.com/
+
+## Bugs
+
+- Need to refresh page after marking a habit as complete for habit streak counter to go up
+- Need to refresh after clicking the bin icon to delete a habit
