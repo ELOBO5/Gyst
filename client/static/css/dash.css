@@ -26,6 +26,7 @@ header {
 	text-transform: uppercase;
 	color: #f4f4f4;
 	font-family: "Exo 2", sans-serif;
+
 }
 
 h1 {
@@ -267,7 +268,7 @@ footer.flex-container {
 	height: 30px;
 }
 
-@media screen and (max-width: 750px) {
+@media screen and (max-width: 780px) {
 	#list-container{
 		display: flex;
 		flex-flow: column wrap;
@@ -293,7 +294,5 @@ footer.flex-container {
 		width: 20px;
 	}
 
-	.individual{
-		width: 60vw;
-	}
+	
 }

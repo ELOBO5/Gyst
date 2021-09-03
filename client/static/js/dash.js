@@ -5,7 +5,7 @@ const token = localStorage.getItem("token");
 
 function checkToken() {
 	if (!token) {
-		window.location.href = "https://gyst.vercel.app/index.html";
+		window.location.href = "http://127.0.0.1:5503/client/index.html";
 		return;
 	}
 }
@@ -147,7 +147,7 @@ const missingHabits = frequency => {
 	const addButton = document.createElement("a");
 	addButton.classList.add("add-habits");
 	addButton.textContent = `Add a new ${frequency} habit`;
-	addButton.href = "https://gyst.vercel.app/newhabit.html";
+	addButton.href = "http://127.0.0.1:5503/client/newhabit.html";
 	document.querySelector(`.habitlist.${frequency}`).appendChild(addButton);
 };
 
@@ -282,7 +282,7 @@ const deleteHabit = async id => {
 
 function logout() {
 	localStorage.clear();
-	window.location.href = "https://gyst.vercel.app/index.html";
+	window.location.href = "http://127.0.0.1:5503/client/index.html";
 }
 
 const logoutButton = document.getElementById("logout");

@@ -30,7 +30,7 @@ function login(token) {
 	localStorage.setItem("username", user.username);
 	localStorage.setItem("email", user.email);
 	localStorage.setItem("id", user.id);
-	window.location.href = "https://gyst.vercel.app/dash.html";
+	window.location.href = "http://127.0.0.1:5503/client/dash.html";
 }
 
 const loginForm = document.querySelector("form#login");

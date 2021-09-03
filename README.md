@@ -41,5 +41,5 @@ Run `bash _scripts/teardown.sh`
 - Users can choose to make a habit a priority
 - Users can mark a habit as complete and view their completion streak
 - Users can delete a habit they are currently tracking
-- Deployed client-side on Vercel: https://gyst.vercel.app/
+- Deployed client-side on Vercel: http://127.0.0.1:5503/client/
 - Deployed api and database on Heroku: https://get-your-sht-together.herokuapp.com/
