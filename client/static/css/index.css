@@ -103,4 +103,8 @@ a {
 	input {
 		width: 60vw;
 	}
+
+	footer{
+		width: 50vw;
+	}
 }
