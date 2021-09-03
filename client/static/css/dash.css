@@ -55,6 +55,7 @@ li > div {
 	display: flex;
 	justify-content: space-around;
 	align-items: flex-start;
+	
 }
 
 .habitlist {
@@ -95,6 +96,7 @@ li > div {
 
 .individual img {
 	width: 20px;
+	/* margin: 10px; */
 }
 
 .habit-checkbox {
@@ -249,11 +251,10 @@ footer.flex-container {
 	height: 30px;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 750px) {
 	#list-container{
 		display: flex;
 		flex-flow: column wrap;
-		background-color: red;
 		justify-content: center;
 		align-items: center;
 	}
@@ -274,5 +275,9 @@ footer.flex-container {
 	#github{
 		height: 20px;
 		width: 20px;
+	}
+
+	.individual{
+		width: 60vw;
 	}
 }
