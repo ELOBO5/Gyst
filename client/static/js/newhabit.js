@@ -3,7 +3,7 @@
 const token = localStorage.getItem("token");
 function checkToken() {
 	if (!token) {
-		window.location.href = "http://127.0.0.1:5503/client/index.html";
+		window.location.href = "https://gyst.vercel.app/index.html";
 		return;
 	}
 }
@@ -34,7 +34,7 @@ function postNewHabit(e) {
 	})
 		.then(res => res.json())
 		.then(data => console.log(data))
-		.then(() => (window.location.href = "http://127.0.0.1:5503/client/dash.html"))
+		.then(() => (window.location.href = "https://gyst.vercel.app/dash.html"))
 		.catch(error => console.log(error, "Error posting entry"));
 }
 
