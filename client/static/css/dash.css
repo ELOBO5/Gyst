@@ -279,8 +279,12 @@ footer.flex-container {
 	.habitlist{
 		width: 70vw;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		margin:30px;
 =======
+=======
+		min-height: 480px;
+>>>>>>> be8922a6bf445ae568a7f5723df1dc20d1f3a82c
 		margin: 30px 0;
 >>>>>>> 51aa464b9b07696c266bde4c4341e4a1cebd9fe5
 	}
