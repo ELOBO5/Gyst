@@ -76,7 +76,7 @@ const addAnalyticsToDocument = habit => {
 	if (habit.completed === 0 || habit.habit_count === 0) {
 		habitStrengthPercentage = 0;
 	} else {
-		habitStrengthPercentage = (habit.completed_counter / habit.habit_count) * 100;
+		habitStrengthPercentage = ((habit.completed_counter / habit.habit_count) * 100).toFixed(0);
 	}
 
 	const statsContainer = document.getElementById("stats-container");
@@ -131,9 +131,9 @@ const getAllHabits = async () => {
 			addHabitToDocument(habit, frequency);
 		});
 
-		const daily = habits.some(habit => habit.frequency === "Daily");
-		const weekly = habits.some(habit => habit.frequency === "Weekly");
-		const monthly = habits.some(habit => habit.frequency === "Monthly");
+		const daily = habits.some(habit => habit.frequency === "Daily" || habit.frequency === "daily"  );
+		const weekly = habits.some(habit => habit.frequency === "Weekly" || habit.frequency === "weekly");
+		const monthly = habits.some(habit => habit.frequency === "Monthly" || habit.frequency === "monthly");
 
 		if (!daily) missingHabits("daily");
 		if (!weekly) missingHabits("weekly");

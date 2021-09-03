@@ -58,6 +58,10 @@ i {
 	cursor: pointer;
 }
 
+#newhabitsign{
+	display:none;
+}
+
 /* habit lists */
 #list-container {
 	width: 95vw;
@@ -278,15 +282,60 @@ footer.flex-container {
 
 	.habitlist{
 		width: 70vw;
-<<<<<<< HEAD
-<<<<<<< HEAD
 		margin:30px;
-=======
-=======
+	}
+
+	header{
+		height: fit-content;
+	}
+
+	img{
+		margin: 0 30px 0 30px;
+	}
+
+	#github{
+		height: 20px;
+		width: 20px;
+	}
+
+	#newhabitsign{
+		display: contents;
+		font-size:1.6rem;
+		
+	}
+
+	#newhabitwords{
+		display:none;
+	}
+
+	h1 {
+		font-size: 5rem;
+		text-align: center;
+		padding-left: 60px;
+	}
+
+	header{
+		align-items: center;
+	}
+
+	.habitlist > h3{
+		color:#2f4f4f;
+	}
+
+}
+
+@media screen and (max-width: 780px) {
+	#list-container{
+		display: flex;
+		flex-flow: column wrap;
+		justify-content: center;
+		align-items: center;
+	}
+
+	.habitlist{
+		width: 70vw;
 		min-height: 480px;
->>>>>>> be8922a6bf445ae568a7f5723df1dc20d1f3a82c
 		margin: 30px 0;
->>>>>>> 51aa464b9b07696c266bde4c4341e4a1cebd9fe5
 	}
 
 	header{
@@ -303,15 +352,6 @@ footer.flex-container {
 	}
 }
 
-<<<<<<< HEAD
-	h3{
-		background-color:#2f4f4f;
-	}
-	
-
-
-	
-=======
 @media screen and (max-width: 680px) {
 	.habitlist{
 		width: 75vw;
@@ -334,12 +374,7 @@ footer.flex-container {
 	.habitlist{
 		width: 90vw;
 	} 
->>>>>>> 51aa464b9b07696c266bde4c4341e4a1cebd9fe5
 }
 
-/* @media screen and (max-width: 680px) {
-.habitlist{
-	width: 90vw;
-	margin: 30px 0 30px;
-}
-} */
+
+	
