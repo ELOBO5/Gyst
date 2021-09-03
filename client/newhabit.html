@@ -11,49 +11,42 @@
     <script defer src='static/js/newhabit.js'></script>
 </head>
 <body>
-    <nav>
-        <ul class='flex-container outer nav'>
-            <ul id='leftnav'>
-                <li><a href='dash.html'>Dash</a></li>
-                <li><a href='newhabit.html'>+</a></li>
-            </ul>
-            
-            <li><a href='#'><img id=logo src='' alt='logo'></a></li>
-            <li><a href='index.html'>Logout</a></li>
-            
-        </ul>
-        
-    </nav>
 
-   <form class='flex-cont-vertical' id=submitNewHabit>
-       <label for="habit">Habit: </label>
-       <input type="text" id="habit-entry" name="habit" placeholder="What would you like to track...?" size='40' maxlength='40' autofocus required><br>
+    <header>
+        <a href='newhabit.html'>Add new habit</a>
+        <h1><a href='dash.html'>Gyst</a></h1>
+        <a href='index.html' id="logout">Log out</a>
+    </header>
+    <main>
+        <form class='flex-cont-vertical' id=submitNewHabit>
+            <label for="habit">Habit: </label>
+            <input type="text" id="habit-entry" name="habit" placeholder="What would you like to track...?" size='40' maxlength='40' autofocus required><br>
 
-       <label for="frequency">Frequency: </label>
-       <select id="habit-frequency" name="frequency">
-           <option value="Daily">Daily</option>
-           <option value="Weekly">Weekly</option>
-           <option value="Monthly">Monthly</option>
-        </select><br>
+            <label for="frequency">Frequency: </label>
+            <select id="habit-frequency" name="frequency">
+                <option value="Daily">Daily</option>
+                <option value="Weekly">Weekly</option>
+                <option value="Monthly">Monthly</option>
+                </select><br>
 
-        <label for="priority"> Is this a priority?</label>
-        <input type="checkbox" id="habit-priority" name="priority" value="priority"><br>
-        
+                <label id=priority-label for="priority"> Spotlight this habit?</label>
+                <input type="checkbox" id="habit-priority" name="priority" value="priority"><br>
+                
 
-        <input id="habit-submit" type="submit" value="Track it!" >
+                <input id="habit-submit" type="submit" value="Track it!" >
 
-    </form>
+            </form>
+    </main>
 
     
-
-    <footer class='flex-container'>
-        <ul class = 'foot outer'>
-            <li><a href='GITREPO'>GYST aka Get Your Shit Together! Bought to you by Tobi, Tegan, Gorazd and Elicia <img src='GITLOGO'></a></li>
-        </ul>
+    <footer class='footer-flex'>
+        <a href='https://github.com/ELOBO5/Gyst'><img id='github' src='./static/images/github.png'></a>
+        <p>Brought to you by Tobi, Tegan, Gorazd and Elicia</p>
     </footer>
+
+    
         
 
 
-    </section>
 </body>
 </html>
