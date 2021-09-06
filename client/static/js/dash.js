@@ -92,12 +92,12 @@ const addAnalyticsToDocument = habit => {
 
 	analyticItemName.textContent = habit.habit;
 
-	if (habit.habit_count === 1 && habit.habit.completed) {
-		analyticsData.textContent = `You started today and are currently on a ${habit.habit_streak}-day streak with a ${habitStrengthPercentage}% completion rate.`;
-	} else if (habit.habit_count === 1 && !habit.habit.completed) {
+	if (habit.habit_count === 1 && habit.completed) {
+		analyticsData.textContent = `You started today and are currently on a day streak, with a ${habitStrengthPercentage}% completion rate.`;
+	} else if (habit.habit_count === 1 && !habit.completed) {
 		analyticsData.textContent = `You started today, so you haven't got a streak yet.`;
 	} else {
-		analyticsData.textContent = `You started ${habit.habit_count} days ago and are currently on a ${habit.habit_streak}-day streak with a ${habitStrengthPercentage}% completion rate.`;
+		analyticsData.textContent = `You started ${habit.habit_count} days ago and are currently on a ${habit.habit_streak}-day streak, with a ${habitStrengthPercentage}% completion rate.`;
 	}
 
 	let habitStrengthScale = habitStrengthPercentage / 10;
