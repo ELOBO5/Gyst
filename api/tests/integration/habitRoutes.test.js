@@ -1,10 +1,21 @@
 describe('Habit Endpoints', () => {
     let api;
-    
-    beforeAll(() => {
+    let token;
+
+    beforeAll(async () => {
         api = server.listen(5000, () => console.log('Test server running on port 5000'));
+
+        await request(api)
+            .post('/auth/register')
+            .send({username: 'user', email: 'useremail@email.com', password: 'pw'})
+
+        const res = await request(api)
+            .post('/auth/login')
+            .send({username: 'user', email: 'useremail@email.com', password: 'pw'})
+
+        token = res.body.token.split(' ')[1];
     })
-    
+
     beforeEach(async () => {
         await resetTestDB();
     })
@@ -22,14 +33,14 @@ describe('Habit Endpoints', () => {
     })
 
     test('returns list of all habits', async () => {
-        const res = await request(api).get('/habits');
+        const res = await request(api).get('/habits').set('Authorization', `Bearer ${token}`);
 
         expect(res.statusCode).toEqual(200);
         expect(res.body.length).toEqual(5);
     })
 
     test('returns a particular habit by id', async () => {
-        const res = await request(api).get('/habits/3');
+        const res = await request(api).get('/habits/3').set('Authorization', `Bearer ${token}`);
 
         expect(res.statusCode).toEqual(200);
 
@@ -44,7 +55,7 @@ describe('Habit Endpoints', () => {
     })
 
     test('responds to non existent paths with 404', async () => {
-        const res = await request(api).get('/asdf');
+        const res = await request(api).get('/asdf').set('Authorization', `Bearer ${token}`);
         
         expect(res.statusCode).toEqual(404);
     })
@@ -60,6 +71,7 @@ describe('Habit Endpoints', () => {
         const res = await request(api)
             .post('/habits')
             .send(habitData)
+            .set('Authorization', `Bearer ${token}`)
         
         expect(res.statusCode).toEqual(201);
 
@@ -72,7 +84,7 @@ describe('Habit Endpoints', () => {
         expect(res.body.completed).toEqual(false);
         expect(res.body.user_id).toEqual(44);
 
-        const newHabitRes = await request(api).get(`/habits/${res.body.id}`);
+        const newHabitRes = await request(api).get(`/habits/${res.body.id}`).set('Authorization', `Bearer ${token}`);
         expect(newHabitRes.statusCode).toEqual(200);
         expect(newHabitRes.body).toBeTruthy();
         expect(newHabitRes.body.habit).toEqual('create test habit');
@@ -89,20 +101,21 @@ describe('Habit Endpoints', () => {
         const res = await request(api)
             .post('/habits')
             .send(tooLongHabitData)
+            .set('Authorization', `Bearer ${token}`)
         
         expect(res.statusCode).toEqual(422);
         expect(res.body).toHaveProperty('err');
 
-        const newHabitRes = await request(api).get(`/habits/${res.body.id}`);
+        const newHabitRes = await request(api).get(`/habits/${res.body.id}`).set('Authorization', `Bearer ${token}`);
         expect(newHabitRes.statusCode).toEqual(404);
         expect(newHabitRes.body).toHaveProperty('err');
     })
 
     test('deletes habit', async () => {
-        const res = await request(api).delete('/habits/2');
+        const res = await request(api).delete('/habits/2').set('Authorization', `Bearer ${token}`);
         expect(res.statusCode).toEqual(204);
 
-        const deletedHabitRes = await request(api).get('/habits/2');
+        const deletedHabitRes = await request(api).get('/habits/2').set('Authorization', `Bearer ${token}`);
         expect(deletedHabitRes.statusCode).toEqual(404);
         expect(deletedHabitRes.body).toHaveProperty('err');
     })
