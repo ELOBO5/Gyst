@@ -5,7 +5,7 @@
 ### Installation
 
 - Clone or download the repo.
-- Open terminal and navigate to Gyst folder.
+- Open terminal and navigate to `gyst` folder.
 
 ### Usage
 
